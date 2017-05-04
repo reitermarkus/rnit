@@ -11,7 +11,7 @@
 
 #include <netdb.h>
 
-#include <netinet/ip.h>
+// #include <netinet/ip.h>
 #include <netinet/in.h> // IPPROTO_RAW, IPPROTO_IP, IPPROTO_TCP, INET_ADDRSTRLEN
 
 
