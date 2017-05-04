@@ -1,0 +1,17 @@
+language: c
+
+matrix:
+  include:
+   - os: osx
+   - os: linux
+     compiler: gcc-4.8
+
+addons:
+  apt:
+    sources:
+     - sourceline: 'ppa:ubuntu-toolchain-r/test'
+    packages:
+     - gcc-4.8
+
+script:
+  - make -C uebung6
