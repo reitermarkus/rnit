@@ -9,7 +9,8 @@ char** tokenize(const char* str, const char* sep, size_t* len) {
     return NULL;
   }
 
-  char *string = strdup(str);
+  char *string = malloc(strlen(str) + 1);
+  strcpy(string, str);
 
   size_t tokens_len = 0;
   char* token = NULL;
@@ -40,5 +41,6 @@ char** tokenize(const char* str, const char* sep, size_t* len) {
     *len = tokens_len;
   }
 
+  free(string);
   return tokens;
 }
