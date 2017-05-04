@@ -1,0 +1,9 @@
+BREGENZ        5
+EISENSTADT     7
+GRAZ           5
+INNSBRUCK      2
+KLAGENFURT     7
+LINZ           7
+SALZUBURG      3
+WIEN           4
+VOELS          9
