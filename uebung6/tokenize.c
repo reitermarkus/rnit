@@ -4,6 +4,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+static void* checked_realloc(void *ptr, size_t size) {
+  ptr = realloc(ptr, size);
+
+  if (ptr == NULL) {
+    perror("realloc");
+    exit(EXIT_FAILURE);
+  }
+
+  return ptr;
+}
+
 char** tokenize(const char* str, const char* sep, size_t* len) {
   if (!str || !sep || !strlen(str) || !strlen(sep)) {
     return NULL;
@@ -21,20 +32,11 @@ char** tokenize(const char* str, const char* sep, size_t* len) {
     token;
     token = strtok_r(NULL, sep, &string)
   ) {
-
-    if (!(tokens = realloc(tokens, sizeof(char*) * (++tokens_len)))) {
-      perror("realloc");
-      exit(EXIT_FAILURE);
-    }
-
+    tokens = checked_realloc(tokens, sizeof(char*) * ++tokens_len);
     tokens[tokens_len - 1] = token;
   }
 
-  if (!(tokens = realloc(tokens, sizeof(char*) * (tokens_len + 1)))) {
-    perror("realloc");
-    exit(EXIT_FAILURE);
-  }
-
+  tokens = checked_realloc(tokens, sizeof(char*) * (tokens_len + 1));
   tokens[tokens_len] = NULL;
 
   if (len) {
