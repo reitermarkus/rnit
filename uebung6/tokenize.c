@@ -20,29 +20,30 @@ char** tokenize(const char* str, const char* sep, size_t* len) {
     return NULL;
   }
 
-  char *string = malloc(strlen(str) + 1);
+  char *string = malloc(sizeof(*string) * (strlen(str) + 1));
   strcpy(string, str);
 
-  size_t tokens_len = 0;
-  char* token = NULL;
+  size_t token_count = 0;
   char** tokens = NULL;
 
+  char* token = NULL;
+  char* last_string = NULL;
+
   for (
-    token = strtok_r(string, sep, &string);
+    token = strtok_r(string, sep, &last_string);
     token;
-    token = strtok_r(NULL, sep, &string)
+    token = strtok_r(NULL, sep, &last_string)
   ) {
-    tokens = checked_realloc(tokens, sizeof(char*) * ++tokens_len);
-    tokens[tokens_len - 1] = token;
+    tokens = checked_realloc(tokens, sizeof(*tokens) * ++token_count);
+    tokens[token_count - 1] = token;
   }
 
-  tokens = checked_realloc(tokens, sizeof(char*) * (tokens_len + 1));
-  tokens[tokens_len] = NULL;
+  tokens = checked_realloc(tokens, sizeof(*tokens) * (token_count + 1));
+  tokens[token_count] = NULL;
 
-  if (len) {
-    *len = tokens_len;
+  if (len != NULL) {
+    *len = token_count;
   }
 
-  free(string);
   return tokens;
 }
