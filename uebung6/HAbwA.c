@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
+#include <unistd.h>
 
 #include <sys/types.h> // struct sockaddr
 #include <sys/socket.h>
@@ -19,9 +20,9 @@
 
 #include "load_file.h"
 #include "tokenize.h"
+#include "address_info.h"
 
-const char* PORT = "5000";
-const char* HOSTNAME = "localhost";
+const int buffer_size = 256;
 
 int main (int argc, char *argv[]) {
   if (argc != 2) {
@@ -47,30 +48,37 @@ int main (int argc, char *argv[]) {
     }
   }
 
-  int status;
+  char buffer[buffer_size];
 
-  struct addrinfo hints;
-  struct addrinfo* address_info;
+  struct sockaddr_in server;
+  struct sockaddr client;
 
-  memset(&hints, 0, sizeof(hints));
-  hints.ai_family = AF_INET;
-  hints.ai_socktype = SOCK_STREAM;
-  hints.ai_flags = hints.ai_flags | AI_CANONNAME;
+  int socket_server = socket(AF_INET , SOCK_STREAM , 0);
 
-  if ((status = getaddrinfo(HOSTNAME, PORT, &hints, &address_info)) != 0) {
-    fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(status));
-  }
+  server.sin_family = AF_INET;
+	server.sin_addr.s_addr = INADDR_ANY;
+	server.sin_port = htons(atoi(PORT));
 
-  int socket_server = socket(address_info->ai_family, address_info->ai_socktype, address_info->ai_protocol);
-
-  printf("host: %s\n", address_info->ai_canonname);
-  printf("port: %d\n", ntohs(((struct sockaddr_in*)(address_info->ai_addr))->sin_port));
-
-  if ((status = bind(socket_server, address_info->ai_addr, address_info->ai_addrlen)) == -1) {
+  if (bind(socket_server, (struct sockaddr *)&server, sizeof(server)) == -1) {
     perror("bind");
   }
 
-  freeaddrinfo(address_info);
+  listen(socket_server, 3);
 
+  if(accept(socket_server, &client, (socklen_t*)sizeof(struct sockaddr_in))) {
+    perror("accept");
+  }
+
+  printf("client connected.\n");
+
+
+  memset(buffer, '\0', buffer_size);
+
+  if(read(socket_server, buffer, buffer_size - 1)) {
+    perror("read");
+  }
+
+  printf(buffer);
+  
   return 0;
 }
