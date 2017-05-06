@@ -25,17 +25,23 @@ int main(int argc , char *argv[]) {
 
   if((client_socket = socket(AF_INET , SOCK_STREAM , 0)) == -1) {
     perror("socket");
+    return -1;
   }
 
-  server.sin_addr.s_addr = inet_addr("0.0.0.0");
+  server.sin_addr.s_addr = inet_addr(HOST);
 	server.sin_family = AF_INET;
 	server.sin_port = htons(atoi(PORT));
 
   if(connect(client_socket, (struct sockaddr *)&server, sizeof(server)) == -1) {
     perror("connect");
+    return -1;
   }
 
+  write(client_socket ,"message from Heiner.", BUFFER_SIZE);
+
   printf("client connected to server.\n");
+
+  close(client_socket);
 
   return 0;
 }

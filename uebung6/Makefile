@@ -25,4 +25,3 @@ clean:
 .PHONY: run
 run: $(PROGRAM)
 	./$(SERVER) cities.txt
-	./$(CLIENT) cities.txt

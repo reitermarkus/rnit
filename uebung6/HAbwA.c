@@ -22,8 +22,6 @@
 #include "tokenize.h"
 #include "address_info.h"
 
-const int buffer_size = 256;
-
 int main (int argc, char *argv[]) {
   if (argc != 2) {
     fprintf(stderr, "Error: %s\n", "Exactly one file must be specified.");
@@ -48,37 +46,42 @@ int main (int argc, char *argv[]) {
     }
   }
 
-  char buffer[buffer_size];
+  char buffer[BUFFER_SIZE];
 
   struct sockaddr_in server;
   struct sockaddr client;
 
   int socket_server = socket(AF_INET , SOCK_STREAM , 0);
+  int client_socket;
 
   server.sin_family = AF_INET;
-	server.sin_addr.s_addr = INADDR_ANY;
+	server.sin_addr.s_addr = htonl(INADDR_ANY);
 	server.sin_port = htons(atoi(PORT));
 
   if (bind(socket_server, (struct sockaddr *)&server, sizeof(server)) == -1) {
     perror("bind");
+    return -1;
   }
 
   listen(socket_server, 3);
 
-  if(accept(socket_server, &client, (socklen_t*)sizeof(struct sockaddr_in))) {
+  socklen_t client_len = sizeof(client);
+
+  if((client_socket = accept(socket_server, &client, &client_len)) < 0) {
     perror("accept");
+    return -1;
   }
 
-  printf("client connected.\n");
+  printf("client connected.\n\n");
 
+  memset(buffer, '\0', BUFFER_SIZE);
 
-  memset(buffer, '\0', buffer_size);
-
-  if(read(socket_server, buffer, buffer_size - 1)) {
+  if(read(client_socket, buffer, BUFFER_SIZE - 1) == -1) {
     perror("read");
+    return -1;
   }
 
-  printf(buffer);
-  
+  printf("%s", buffer);
+
   return 0;
 }
