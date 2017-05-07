@@ -38,14 +38,12 @@ int main (int argc, char *argv[]) {
   char** lines = tokenize(file_content, "\n", &line_count);
 
   struct sockaddr_in server;
-  struct sockaddr client;
 
   server.sin_family = AF_INET;
 	server.sin_addr.s_addr = htonl(INADDR_ANY);
 	server.sin_port = htons(atoi(PORT));
 
   int socket_server = socket(server.sin_family, SOCK_STREAM, 0);
-  int client_socket;
 
   if (bind(socket_server, (struct sockaddr *)&server, sizeof(server)) == -1) {
     perror("bind");
@@ -53,10 +51,12 @@ int main (int argc, char *argv[]) {
   }
 
   if (exit_value == EXIT_SUCCESS) {
-
     listen(socket_server, 3);
 
     forever {
+      struct sockaddr client;
+      int client_socket;
+
       socklen_t client_len = sizeof(client);
 
       printf("%s\n", "Waiting for client to connect…");
