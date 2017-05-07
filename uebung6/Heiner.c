@@ -23,9 +23,9 @@ int main(int argc , char *argv[]) {
 
   int client_socket;
 
-  if((client_socket = socket(AF_INET , SOCK_STREAM , 0)) == -1) {
+  if((client_socket = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
     perror("socket");
-    return -1;
+    exit(EXIT_FAILURE);
   }
 
   server.sin_addr.s_addr = inet_addr(HOST);
@@ -34,10 +34,11 @@ int main(int argc , char *argv[]) {
 
   if(connect(client_socket, (struct sockaddr *)&server, sizeof(server)) == -1) {
     perror("connect");
-    return -1;
+    close(client_socket);
+    exit(EXIT_FAILURE);
   }
 
-  printf("connected to server.\n");
+  printf("Connected to server.\n");
 
   printf("Enter request...\n");
 
@@ -45,11 +46,17 @@ int main(int argc , char *argv[]) {
   char receive_buffer[BUFFER_SIZE];
 
   fgets(send_buffer, BUFFER_SIZE - 1, stdin);
-  write(client_socket, send_buffer, BUFFER_SIZE);
+
+  if(write(client_socket, send_buffer, BUFFER_SIZE) == -1) {
+    perror("write");
+    close(client_socket);
+    exit(EXIT_FAILURE);
+  }
 
   if(read(client_socket, receive_buffer, BUFFER_SIZE - 1) == -1) {
     perror("read");
-    return -1;
+    close(client_socket);
+    exit(EXIT_FAILURE);
   }
 
   printf("%s\n", "resonse from server:");
@@ -57,5 +64,5 @@ int main(int argc , char *argv[]) {
 
   close(client_socket);
 
-  return 0;
+  return EXIT_SUCCESS;
 }

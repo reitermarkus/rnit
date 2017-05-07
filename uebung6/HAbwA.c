@@ -27,12 +27,12 @@ int main (int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
 
+  int exit_value = EXIT_SUCCESS;
+
   const char* file_content = load_file(argv[1]);
 
   size_t line_count;
   char** lines = tokenize(file_content, "\n", &line_count);
-
-  char buffer[BUFFER_SIZE];
 
   struct sockaddr_in server;
   struct sockaddr client;
@@ -46,80 +46,101 @@ int main (int argc, char *argv[]) {
 
   if (bind(socket_server, (struct sockaddr *)&server, sizeof(server)) == -1) {
     perror("bind");
-    close(socket_server);
-    free_tokens(lines);
-    return -1;
+    exit_value = EXIT_FAILURE;
   }
 
-  listen(socket_server, 3);
+  if (exit_value == EXIT_SUCCESS) {
 
-  while(1) {
-    socklen_t client_len = sizeof(client);
+    listen(socket_server, 3);
 
-    printf("%s\n", "waiting for client to connect.");
-    if((client_socket = accept(socket_server, &client, &client_len)) < 0) {
-      perror("accept");
-      free_tokens(lines);
-      return -1;
-    }
+    while(1) {
+      socklen_t client_len = sizeof(client);
 
-    // get ip of client
+      printf("%s\n", "waiting for client to connect.");
+      if((client_socket = accept(socket_server, &client, &client_len)) < 0) {
+        perror("accept");
+        close(client_socket);
+        exit_value = EXIT_FAILURE;
+        break;
+      }
 
-    char client_ip_address[INET_ADDRSTRLEN];
-    inet_ntop(server.sin_family, (void*)(&((struct sockaddr_in *)&client)->sin_addr.s_addr), (char*)&client_ip_address, INET_ADDRSTRLEN);
+      // get ip of client
 
-    printf("Client with IP %s connected.\n", client_ip_address);
+      char client_ip_address[INET_ADDRSTRLEN];
+      inet_ntop(server.sin_family, (void*)(&((struct sockaddr_in *)&client)->sin_addr.s_addr), (char*)&client_ip_address, INET_ADDRSTRLEN);
 
-    // read message from client and return "Gefahrengrad"
+      printf("Client with IP %s connected.\n", client_ip_address);
 
-    memset(buffer, '\0', BUFFER_SIZE);
+      // read message from client and return "Gefahrengrad"
 
-    if(read(client_socket, buffer, BUFFER_SIZE - 1) == -1) {
-      perror("read");
-      free_tokens(lines);
-      return -1;
-    }
-
-    if(buffer[0] != '\n') {
-      printf("%s%s%s\n", client_ip_address, " requested info for: ", buffer);
-
-      size_t request_len;
-      char** requests = tokenize(buffer, " ", &request_len);
-
+      char buffer[BUFFER_SIZE];
       memset(buffer, '\0', BUFFER_SIZE);
 
-      for (size_t i = 0; i < line_count; i++) {
-        size_t token_count;
-        char** tokens = tokenize(lines[i], " ", &token_count);
+      if(read(client_socket, buffer, BUFFER_SIZE - 1) == -1) {
+        perror("read");
+        close(client_socket);
+        exit_value = EXIT_FAILURE;
+        break;
+      }
 
-        for (size_t j = 0; j < request_len; j++) {
-          for(int i = 0; requests[j][i]; i++) requests[j][i] = toupper(requests[j][i]);
-          if(strcmp(strtok(requests[j], "\n"), tokens[0]) == 0) {
-            char temp_output[BUFFER_SIZE];
-            sprintf(temp_output, "%s%s%s%s\n", "Gefahrengrad for ", requests[j], " is ", tokens[1]);
-            printf("%s", temp_output);
-            strcat(buffer, temp_output);
+      if(buffer[0] != '\n') {
+        printf("%s%s%s\n", client_ip_address, " requested info for: ", buffer);
+
+        size_t request_len;
+        char** requests = tokenize(buffer, " ", &request_len);
+
+        memset(buffer, '\0', BUFFER_SIZE);
+
+        for (size_t i = 0; i < line_count; i++) {
+          size_t token_count;
+          char** tokens = tokenize(lines[i], " ", &token_count);
+
+          for (size_t j = 0; j < request_len; j++) {
+            for(int i = 0; requests[j][i]; i++) requests[j][i] = toupper(requests[j][i]);
+            if(strcmp(strtok(requests[j], "\n"), tokens[0]) == 0) {
+              char temp_output[BUFFER_SIZE];
+              sprintf(temp_output, "%s%s%s%s\n", "Gefahrengrad for ", requests[j], " is ", tokens[1]);
+              printf("%s", temp_output);
+              strcat(buffer, temp_output);
+            }
+          }
+
+          free_tokens(tokens);
+        }
+
+        if(buffer[0] == '\0') {
+          printf("%s\n", "wrong input from client.");
+          if(write(client_socket, "wrong input.", BUFFER_SIZE) == -1) {
+            perror("write");
+            close(client_socket);
+            exit_value = EXIT_FAILURE;
+            break;
+          }
+        } else {
+          if(write(client_socket, buffer, BUFFER_SIZE) == -1) {
+            perror("write");
+            close(client_socket);
+            exit_value = EXIT_FAILURE;
+            break;
           }
         }
 
-        free_tokens(tokens);
-      }
-
-      if(buffer[0] == '\0') {
-        printf("%s\n", "wrong input from client.");
-        write(client_socket, "wrong input.", BUFFER_SIZE);
+        free_tokens(requests);
+        printf("%s\n", "client disconnected.\n");
       } else {
-        write(client_socket, buffer, BUFFER_SIZE);
+        printf("%s\n", "wrong input from client.");
+        if(write(client_socket, "wrong input.", BUFFER_SIZE) == -1) {
+          perror("write");
+          close(client_socket);
+          exit_value = EXIT_FAILURE;
+          break;
+        }
       }
-
-      free_tokens(requests);
-      printf("%s\n", "client disconnected.\n");
-    } else {
-      printf("%s\n", "wrong input from client.");
-      write(client_socket, "wrong input.", BUFFER_SIZE);
     }
   }
 
+  close(socket_server);
+
   free_tokens(lines);
-  return 0;
+  return exit_value;
 }
