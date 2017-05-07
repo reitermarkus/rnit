@@ -18,6 +18,7 @@
 
 #include "load_file.h"
 #include "tokenize.h"
+#include "forever.h"
 #include "buffer_size.h"
 
 #define PORT "5000"
@@ -55,7 +56,7 @@ int main (int argc, char *argv[]) {
 
     listen(socket_server, 3);
 
-    while(1) {
+    forever {
       socklen_t client_len = sizeof(client);
 
       printf("%s\n", "Waiting for client to connect…");
@@ -77,7 +78,7 @@ int main (int argc, char *argv[]) {
 
       FILE* stream = fdopen(client_socket, "r+");
 
-      while(1) {
+      forever {
         char buffer[BUFFER_SIZE];
         memset(buffer, '\0', BUFFER_SIZE);
         fgets(buffer, BUFFER_SIZE, stream);
