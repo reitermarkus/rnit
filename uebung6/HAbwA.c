@@ -14,12 +14,14 @@
 
 #include <netinet/in.h> // IPPROTO_RAW, IPPROTO_IP, IPPROTO_TCP, INET_ADDRSTRLEN
 
-
 #include <errno.h>
 
 #include "load_file.h"
 #include "tokenize.h"
-#include "address_info.h"
+#include "buffer_size.h"
+
+#define PORT "5000"
+#define HOST "127.0.0.1"
 
 int main (int argc, char *argv[]) {
   if (argc != 2) {
@@ -56,7 +58,7 @@ int main (int argc, char *argv[]) {
     while(1) {
       socklen_t client_len = sizeof(client);
 
-      printf("%s\n", "waiting for client to connect.");
+      printf("%s\n", "Waiting for client to connect…");
       if((client_socket = accept(socket_server, &client, &client_len)) < 0) {
         perror("accept");
         close(client_socket);
@@ -73,69 +75,58 @@ int main (int argc, char *argv[]) {
 
       // read message from client and return "Gefahrengrad"
 
-      char buffer[BUFFER_SIZE];
-      memset(buffer, '\0', BUFFER_SIZE);
+      FILE* stream = fdopen(client_socket, "r+");
 
-      if(read(client_socket, buffer, BUFFER_SIZE - 1) == -1) {
-        perror("read");
-        close(client_socket);
-        exit_value = EXIT_FAILURE;
-        break;
-      }
-
-      if(buffer[0] != '\n') {
-        printf("%s%s%s\n", client_ip_address, " requested info for: ", buffer);
-
-        size_t request_len;
-        char** requests = tokenize(buffer, " ", &request_len);
-
+      while(1) {
+        char buffer[BUFFER_SIZE];
         memset(buffer, '\0', BUFFER_SIZE);
+        fgets(buffer, BUFFER_SIZE, stream);
+
+        int buffer_strlen = strlen(buffer);
+
+        if (buffer[buffer_strlen - 1] == '\n') {
+          buffer[buffer_strlen - 1] = '\0';
+        }
+
+        if (strlen(buffer) == 0) {
+          break;
+        }
+
+        for(int i = 0; buffer[i]; i++) {
+          buffer[i] = toupper(buffer[i]);
+        }
+
+        printf("Client %s requested info for: '%s'\n", client_ip_address, buffer);
+
+        char output_buffer[BUFFER_SIZE];
+        memset(output_buffer, '\0', BUFFER_SIZE);
 
         for (size_t i = 0; i < line_count; i++) {
           size_t token_count;
           char** tokens = tokenize(lines[i], " ", &token_count);
 
-          for (size_t j = 0; j < request_len; j++) {
-            for(int i = 0; requests[j][i]; i++) requests[j][i] = toupper(requests[j][i]);
-            if(strcmp(strtok(requests[j], "\n"), tokens[0]) == 0) {
-              char temp_output[BUFFER_SIZE];
-              sprintf(temp_output, "%s%s%s%s\n", "Gefahrengrad for ", requests[j], " is ", tokens[1]);
-              printf("%s", temp_output);
-              strcat(buffer, temp_output);
-            }
+          if (strcmp(tokens[0], buffer) == 0) {
+            sprintf(output_buffer, "%s\n", tokens[1]);
           }
 
           free_tokens(tokens);
         }
 
-        if(buffer[0] == '\0') {
-          printf("%s\n", "wrong input from client.");
-          if(write(client_socket, "wrong input.", BUFFER_SIZE) == -1) {
-            perror("write");
-            close(client_socket);
-            exit_value = EXIT_FAILURE;
-            break;
-          }
-        } else {
-          if(write(client_socket, buffer, BUFFER_SIZE) == -1) {
-            perror("write");
-            close(client_socket);
-            exit_value = EXIT_FAILURE;
-            break;
-          }
+        if (strlen(output_buffer) == 0) {
+          sprintf(output_buffer, "-1\n");
         }
 
-        free_tokens(requests);
-        printf("%s\n", "client disconnected.\n");
-      } else {
-        printf("%s\n", "wrong input from client.");
-        if(write(client_socket, "wrong input.", BUFFER_SIZE) == -1) {
+        printf("Sending response to client %s: %s", client_ip_address, output_buffer);
+
+        if(write(client_socket, output_buffer, BUFFER_SIZE) == -1) {
           perror("write");
           close(client_socket);
           exit_value = EXIT_FAILURE;
           break;
         }
       }
+
+      fclose(stream);
     }
   }
 

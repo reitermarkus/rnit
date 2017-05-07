@@ -13,11 +13,11 @@
 
 #include <errno.h>
 
-#include "address_info.h"
+#include "buffer_size.h"
 
 int main(int argc , char *argv[]) {
-  (void)argc;
-  (void)argv;
+  const char* HOST = argv[1];
+  const int PORT = atoi(argv[2]);
 
   struct sockaddr_in server;
 
@@ -30,7 +30,7 @@ int main(int argc , char *argv[]) {
 
   server.sin_addr.s_addr = inet_addr(HOST);
 	server.sin_family = AF_INET;
-	server.sin_port = htons(atoi(PORT));
+	server.sin_port = htons(PORT);
 
   if(connect(client_socket, (struct sockaddr *)&server, sizeof(server)) == -1) {
     perror("connect");
@@ -40,27 +40,30 @@ int main(int argc , char *argv[]) {
 
   printf("Connected to server.\n");
 
-  printf("Enter request...\n");
-
   char send_buffer[BUFFER_SIZE];
   char receive_buffer[BUFFER_SIZE];
 
-  fgets(send_buffer, BUFFER_SIZE - 1, stdin);
+  for (int i = 3; i < argc; i++) {
+    printf("Sending request to server: '%s'\n", argv[i]);
 
-  if(write(client_socket, send_buffer, BUFFER_SIZE) == -1) {
-    perror("write");
-    close(client_socket);
-    exit(EXIT_FAILURE);
+    memset(send_buffer, '\0', BUFFER_SIZE);
+    sprintf(send_buffer, "%s\n", argv[i]);
+
+    if(write(client_socket, send_buffer, strlen(send_buffer)) == -1) {
+      perror("write");
+      close(client_socket);
+      exit(EXIT_FAILURE);
+    }
+
+    memset(receive_buffer, '\0', BUFFER_SIZE);
+    if(read(client_socket, receive_buffer, BUFFER_SIZE) == -1) {
+      perror("read");
+      close(client_socket);
+      exit(EXIT_FAILURE);
+    }
+
+    printf("Got resonse from server:\n%s", receive_buffer);
   }
-
-  if(read(client_socket, receive_buffer, BUFFER_SIZE - 1) == -1) {
-    perror("read");
-    close(client_socket);
-    exit(EXIT_FAILURE);
-  }
-
-  printf("%s\n", "resonse from server:");
-  printf("%s", receive_buffer);
 
   close(client_socket);
 

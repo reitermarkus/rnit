@@ -24,4 +24,4 @@ clean:
 
 .PHONY: run
 run: $(PROGRAM)
-	./$(SERVER) cities.txt
+	./test.sh $(SERVER) $(CLIENT)
