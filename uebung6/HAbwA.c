@@ -47,7 +47,7 @@ int main (int argc, char *argv[]) {
   if (bind(socket_server, (struct sockaddr *)&server, sizeof(server)) == -1) {
     perror("bind");
     close(socket_server);
-    free_tokens(lines, line_count);
+    free_tokens(lines);
     return -1;
   }
 
@@ -59,24 +59,24 @@ int main (int argc, char *argv[]) {
     printf("%s\n", "waiting for client to connect.");
     if((client_socket = accept(socket_server, &client, &client_len)) < 0) {
       perror("accept");
-      free_tokens(lines, line_count);
+      free_tokens(lines);
       return -1;
     }
 
-    //get ip of client
+    // get ip of client
 
     char client_ip_address[INET_ADDRSTRLEN];
     inet_ntop(server.sin_family, (void*)(&((struct sockaddr_in *)&client)->sin_addr.s_addr), (char*)&client_ip_address, INET_ADDRSTRLEN);
 
     printf("Client with IP %s connected.\n", client_ip_address);
 
-    //read message from client and return "Gefahrengrad"
+    // read message from client and return "Gefahrengrad"
 
     memset(buffer, '\0', BUFFER_SIZE);
 
     if(read(client_socket, buffer, BUFFER_SIZE - 1) == -1) {
       perror("read");
-      free_tokens(lines, line_count);
+      free_tokens(lines);
       return -1;
     }
 
@@ -102,7 +102,7 @@ int main (int argc, char *argv[]) {
           }
         }
 
-        free_tokens(tokens, token_count);
+        free_tokens(tokens);
       }
 
       if(buffer[0] == '\0') {
@@ -112,7 +112,7 @@ int main (int argc, char *argv[]) {
         write(client_socket, buffer, BUFFER_SIZE);
       }
 
-      free_tokens(requests, request_len);
+      free_tokens(requests);
       printf("%s\n", "client disconnected.\n");
     } else {
       printf("%s\n", "wrong input from client.");
@@ -120,6 +120,6 @@ int main (int argc, char *argv[]) {
     }
   }
 
-  free_tokens(lines, line_count);
+  free_tokens(lines);
   return 0;
 }
