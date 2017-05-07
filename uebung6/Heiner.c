@@ -37,13 +37,23 @@ int main(int argc , char *argv[]) {
     return -1;
   }
 
-  printf("client connected to server.\n");
+  printf("connected to server.\n");
 
-  printf("Enter message...\n");
+  printf("Enter request...\n");
 
-  char buffer[BUFFER_SIZE];
-  fgets(buffer, BUFFER_SIZE - 1, stdin);
-  write(client_socket, buffer, BUFFER_SIZE);
+  char send_buffer[BUFFER_SIZE];
+  char receive_buffer[BUFFER_SIZE];
+
+  fgets(send_buffer, BUFFER_SIZE - 1, stdin);
+  write(client_socket, send_buffer, BUFFER_SIZE);
+
+  if(read(client_socket, receive_buffer, BUFFER_SIZE - 1) == -1) {
+    perror("read");
+    return -1;
+  }
+
+  printf("%s\n", "resonse from server:");
+  printf("%s", receive_buffer);
 
   close(client_socket);
 

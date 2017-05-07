@@ -33,19 +33,6 @@ int main (int argc, char *argv[]) {
   size_t line_count;
   char** lines = tokenize(file_content, "\n", &line_count);
 
-  printf("%ld lines\n", line_count);
-
-  for (size_t i = 0; i < line_count; i++) {
-    printf("line %ld:\n", i);
-
-    size_t token_count;
-    char** tokens = tokenize(lines[i], " ", &token_count);
-
-    for (size_t j = 0; j < token_count; j++) {
-      printf("  token %ld: %s\n", j, tokens[j]);
-    }
-  }
-
   char buffer[BUFFER_SIZE];
 
   struct sockaddr_in server;
@@ -109,7 +96,7 @@ int main (int argc, char *argv[]) {
 
     printf("%s%s\n", address, " connected.");
 
-    //read message from client
+    //read message from client and return "Gefahrengrad"
 
     memset(buffer, '\0', BUFFER_SIZE);
 
@@ -120,9 +107,45 @@ int main (int argc, char *argv[]) {
       return -1;
     }
 
-    printf("%s%s%s", address, " wrote: ", buffer);
-    free_tokens(ip, len);
-    printf("%s\n", "client disconnected.\n");
+    if(buffer[0] != '\n') {
+      printf("%s%s%s\n", address, " requested info for: ", buffer);
+      free_tokens(ip, len);
+
+      size_t request_len;
+      char** requests = tokenize(buffer, " ", &request_len);
+
+      memset(buffer, '\0', BUFFER_SIZE);
+
+      for (size_t i = 0; i < line_count; i++) {
+        size_t token_count;
+        char** tokens = tokenize(lines[i], " ", &token_count);
+
+        for (size_t j = 0; j < request_len; j++) {
+          if(strcmp(strtok(requests[j], "\n"), tokens[0]) == 0) {
+            char temp_output[BUFFER_SIZE];          
+            sprintf(temp_output, "%s%s%s%s\n", "Gefahrengrad for ", requests[j], " is ", tokens[1]);
+            printf("%s", temp_output);
+            strcat(buffer, temp_output);
+          }
+        }
+
+        free_tokens(tokens, token_count);
+      }
+
+      if(buffer[0] == '\0') {
+        printf("%s\n", "wrong input from client.");
+        write(client_socket, "wrong input.", BUFFER_SIZE);   
+      } else {
+        write(client_socket, buffer, BUFFER_SIZE);  
+      }   
+
+      free_tokens(requests, request_len);
+      printf("%s\n", "client disconnected.\n");
+    } else {
+      printf("%s\n", "wrong input from client.");
+      write(client_socket, "wrong input.", BUFFER_SIZE);   
+      free_tokens(ip, len);
+    }  
   }
   
   free_tokens(lines, line_count);
