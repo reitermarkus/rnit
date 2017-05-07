@@ -29,12 +29,12 @@ int main (int argc, char *argv[]) {
 
   int exit_value = EXIT_SUCCESS;
 
-  const char* file_content = load_file(argv[1]);
+  char* file_content = load_file(argv[1]);
 
   size_t line_count;
   char** lines = tokenize(file_content, "\n", &line_count);
 
-  struct sockaddr_in server;
+  free(file_content);
 
   server.sin_family = AF_INET;
 	server.sin_addr.s_addr = htonl(INADDR_ANY);
