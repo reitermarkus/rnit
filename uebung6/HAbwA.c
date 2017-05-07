@@ -21,9 +21,6 @@
 #include "forever.h"
 #include "buffer_size.h"
 
-#define PORT "5000"
-#define HOST "127.0.0.1"
-
 int main (int argc, char *argv[]) {
   if (argc != 2) {
     fprintf(stderr, "Error: %s\n", "Exactly one file must be specified.");
@@ -41,7 +38,7 @@ int main (int argc, char *argv[]) {
 
   server.sin_family = AF_INET;
 	server.sin_addr.s_addr = htonl(INADDR_ANY);
-	server.sin_port = htons(atoi(PORT));
+	server.sin_port = htons(5000);
 
   int socket_server = socket(server.sin_family, SOCK_STREAM, 0);
 
