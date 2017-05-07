@@ -37,9 +37,13 @@ int main(int argc , char *argv[]) {
     return -1;
   }
 
-  write(client_socket ,"message from Heiner.", BUFFER_SIZE);
-
   printf("client connected to server.\n");
+
+  printf("Enter message...\n");
+
+  char buffer[BUFFER_SIZE];
+  fgets(buffer, BUFFER_SIZE - 1, stdin);
+  write(client_socket, buffer, BUFFER_SIZE);
 
   close(client_socket);
 

@@ -47,3 +47,9 @@ char** tokenize(const char* str, const char* sep, size_t* len) {
 
   return tokens;
 }
+
+void free_tokens(char** tokens, int len) {
+  for(int i = 0; i < len; i++) {
+    free(tokens[i]);
+  }
+}
