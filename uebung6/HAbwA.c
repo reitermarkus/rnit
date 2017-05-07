@@ -81,7 +81,14 @@ int main (int argc, char *argv[]) {
       forever {
         char buffer[BUFFER_SIZE];
         memset(buffer, '\0', BUFFER_SIZE);
-        fgets(buffer, BUFFER_SIZE, stream);
+
+        if (fgets(buffer, BUFFER_SIZE, stream) == NULL) {
+          if (ferror(stream)) {
+            perror("fgets");
+            exit_value = EXIT_FAILURE;
+            break;
+          }
+        }
 
         int buffer_strlen = strlen(buffer);
 
@@ -128,6 +135,10 @@ int main (int argc, char *argv[]) {
       }
 
       fclose(stream);
+
+      if (exit_value != EXIT_SUCCESS) {
+        break;
+      }
     }
   }
 
