@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <unistd.h>
+#include <ctype.h>
 
 #include <sys/types.h> // struct sockaddr
 #include <sys/socket.h>
@@ -115,14 +116,15 @@ int main (int argc, char *argv[]) {
       char** requests = tokenize(buffer, " ", &request_len);
 
       memset(buffer, '\0', BUFFER_SIZE);
-
+      
       for (size_t i = 0; i < line_count; i++) {
         size_t token_count;
         char** tokens = tokenize(lines[i], " ", &token_count);
 
         for (size_t j = 0; j < request_len; j++) {
+          for(int i = 0; requests[j][i]; i++) requests[j][i] = toupper(requests[j][i]);   
           if(strcmp(strtok(requests[j], "\n"), tokens[0]) == 0) {
-            char temp_output[BUFFER_SIZE];          
+            char temp_output[BUFFER_SIZE];   
             sprintf(temp_output, "%s%s%s%s\n", "Gefahrengrad for ", requests[j], " is ", tokens[1]);
             printf("%s", temp_output);
             strcat(buffer, temp_output);
