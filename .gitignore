@@ -1,5 +1,17 @@
+# C
 *.o
 *.exe
 
+
+# LaTeX
+*.aux
+*.pdf
+*.log
+.*.lb
+*.synctex.gz
+
+
 uebung6/HAbwA
 uebung6/Heiner
+!uebung6/uebung6-1a.pdf
+!uebung6/uebung6-1e.pdf
