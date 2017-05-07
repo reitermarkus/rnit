@@ -36,9 +36,11 @@ int main (int argc, char *argv[]) {
 
   free(file_content);
 
-  server.sin_family = AF_INET;
-	server.sin_addr.s_addr = htonl(INADDR_ANY);
-	server.sin_port = htons(5000);
+  struct sockaddr_in server = {
+    .sin_family = AF_INET,
+  	.sin_addr.s_addr = htonl(INADDR_ANY),
+  	.sin_port = htons(5000),
+  };
 
   int socket_server = socket(server.sin_family, SOCK_STREAM, 0);
 

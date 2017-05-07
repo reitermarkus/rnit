@@ -19,11 +19,11 @@ int main(int argc , char *argv[]) {
   const char* HOST = argv[1];
   const int PORT = atoi(argv[2]);
 
-  struct sockaddr_in server;
-
-  server.sin_addr.s_addr = inet_addr(HOST);
-	server.sin_family = AF_INET;
-	server.sin_port = htons(PORT);
+  struct sockaddr_in server = {
+    .sin_addr.s_addr = inet_addr(HOST),
+  	.sin_family = AF_INET,
+  	.sin_port = htons(PORT),
+  };
 
   int client_socket;
 
