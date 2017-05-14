@@ -1,0 +1,49 @@
+% !TEX TS-program = xelatex
+%
+\documentclass[ngerman]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\usepackage{siunitx}
+\sisetup{per-mode = symbol, binary-units = true}
+\DeclareSIUnit\mbyte{Byte}
+
+\usepackage{graphicx}
+
+\begin{document}
+
+\section*{2}
+	\begin{enumerate}[label=\alph*)]
+    \item
+      Base-64 wird hauptsächlich dazu verwendet, Daten zu übertragen, denn es könnte  sonst vorkommen, dass manche Zeichen als Kontrollzeichen behandelt werden.
+    \item
+    \ 
+    \resizebox{\textwidth}{!}{
+      \texttt{
+        \begin{tabular}{|l|*{48}{c|}}
+          \hline
+          \textnormal{\textbf{ASCII}} & \multicolumn{8}{c|}{U} & \multicolumn{8}{c|}{I} & \multicolumn{8}{c|}{B} & \multicolumn{8}{c|}{K} & \multicolumn{8}{c|}{} & \multicolumn{8}{c|}{} \\
+          \hline
+          \textnormal{\textbf{Dezimal (Hex)}} & \multicolumn{8}{c|}{85 (0x55)} & \multicolumn{8}{c|}{73 (0x49)} & \multicolumn{8}{c|}{66 (0x42)} & \multicolumn{8}{c|}{75 (0x4B)} & \multicolumn{8}{c|}{} & \multicolumn{8}{c|}{} \\
+          \hline
+          \textnormal{\textbf{Binär}} & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+          \hline
+          \textnormal{\textbf{Index}} & \multicolumn{6}{c|}{21} & \multicolumn{6}{c|}{20} & \multicolumn{6}{c|}{37} & \multicolumn{6}{c|}{2} & \multicolumn{6}{c|}{18}  & \multicolumn{6}{c|}{48} & \multicolumn{6}{c|}{0}& \multicolumn{6}{c|}{0} \\
+          \hline
+          \textnormal{\textbf{Base-64}} & \multicolumn{6}{c|}{V} & \multicolumn{6}{c|}{U} & \multicolumn{6}{c|}{l} & \multicolumn{6}{c|}{C} & \multicolumn{6}{c|}{S} & \multicolumn{6}{c|}{w} & \multicolumn{6}{c|}{=} & \multicolumn{6}{c|}{=} \\
+          \hline
+        \end{tabular}
+      }
+    }
+    \addtocounter{enumi}{1}
+    \item
+    \begin{equation*}
+      \frac{\SI{3072}{\byte} + (\SI{3072}{\byte}\ \%\ 3)}{3} \cdot 4 = \SI{4096}{\byte} \\
+    \end{equation*}
+    \begin{equation*}
+      \SI{4096}{\byte} + 2 \cdot \frac{\SI{4096}{\byte}}{8} = \SI{5120}{\byte}
+    \end{equation*}
+  \end{enumerate}
+\end{document}
