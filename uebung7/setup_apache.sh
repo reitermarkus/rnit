@@ -45,3 +45,6 @@ cat <<EOF > /var/www/public/index.html
   </body>
 </html>
 EOF
+
+mkdir -p /var/www/secret/base64
+mkdir -p /var/www/secret/dns
