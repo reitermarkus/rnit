@@ -46,4 +46,42 @@
       \SI{4096}{\byte} + 2 \cdot \frac{\SI{4096}{\byte}}{8} = \SI{5120}{\byte}
     \end{equation*}
   \end{enumerate}
+
+\section*{3}
+	\begin{enumerate}[label=\alph*)]
+	\item 
+	  Das Domain Name System is zuständig für die Auflösung von Computernamen in IP-Adressen.
+	  Ruft man eine Website mit einem Namen auf, wird nach der dazugehörigen IP in einer Datenbank 
+	  in einem DNS-Server gesucht. Kann der Name nicht aufgelöst werden, kann auch keine Verbindung 
+	  mit der Website hergestellt werden.
+	  
+	  mit host -t kann ein DNS lookup erfolgen.
+	  
+	  host -t a google.at ergibt: \\
+	  google.at has address 172.217.22.3
+	 \item 
+	  nein
+	  
+	\end{enumerate}
+\pagebreak	  
+\section*{4}
+	 printf Verspätete Abmeldung aus dem Proseminar | base64 \\
+	 VmVyc3DDpHRldGUgQWJtZWxkdW5nIGF1cyBkZW0gUHJvc2VtaW5hcg== \\
+	 
+	 telnet smtp.uibk.ac.at 25 \\
+	 
+	 MAIL FROM:heiner.bernadino@uibk.ac.at \\
+	 RCPT TO:michael.kaltschmid@student.uibk.ac.at \\
+	 DATA \\
+	 Content-Type: text/plain; charset="UTF-8" \\
+	 Subject:=VmVyc3DDpHRldGUgQWJtZWxkdW5nIGF1cyBkZW0gUHJvc2VtaW5hcg== \\
+	 Liebes RNIT-Team, \\
+	 25 ist der Port von SMTP. \\
+	 Leider ist mir das Proseminar insgesamt zu schwer. \\
+	 Deswegen melde ich mich hiermit vom Proseminar Rechnernetze und \\
+	 Internettechnik im Sommersemester 2017 ab. \\
+	 Danke vielmals, \\
+	 Heiner Bernadino \\
+	 Matrikelnummer: 1518956 \\ 
+	 .	  
 \end{document}
