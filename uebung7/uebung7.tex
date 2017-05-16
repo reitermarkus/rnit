@@ -60,7 +60,12 @@
 	  host -t a google.at ergibt: \\
 	  google.at has address 172.217.22.3
 	 \item 
-	  nein
+	  Ja, ein Beispiel dafür wäre: \\
+	  \\
+	  host -t a wikipedia.com \\
+	  wikipedia.com has address 91.198.174.192 \\
+	  host -t a wikipedia.org \\
+	  wikipedia.org has address 91.198.174.192 \\
 	  
 	\end{enumerate}
 \pagebreak	  
@@ -74,7 +79,7 @@
 	 RCPT TO:michael.kaltschmid@student.uibk.ac.at \\
 	 DATA \\
 	 Content-Type: text/plain; charset="UTF-8" \\
-	 Subject:=VmVyc3DDpHRldGUgQWJtZWxkdW5nIGF1cyBkZW0gUHJvc2VtaW5hcg== \\
+	 Subject:=?UTF-8?B?VmVyc3DDpHRldGUgQWJtZWxkdW5nIGF1cyBkZW0gUHJvc2VtaW5hcg== \\
 	 Liebes RNIT-Team, \\
 	 25 ist der Port von SMTP. \\
 	 Leider ist mir das Proseminar insgesamt zu schwer. \\
