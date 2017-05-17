@@ -1,7 +1,7 @@
 #!/bin/sh
 
 apt-get update
-apt-get upgrade
+apt-get upgrade -y
 apt-get install apache2
 service apache2 start
 
@@ -19,21 +19,6 @@ cat <<EOF > /etc/apache2/sites-available/public.conf
 </VirtualHost>
 EOF
 
-cat <<EOF > /etc/apache2/sites-available/microsoftfake134.conf
-<VirtualHost *:80>
-    ServerName microsoftfake134.com
-    DocumentRoot /var/www/microsoftfake134
-</VirtualHost>
-EOF
-
-
-cat <<EOF > /etc/apache2/sites-available/githubfake134.conf
-<VirtualHost *:80>
-    ServerName githubfake134.com
-    DocumentRoot /var/www/githubfake134
-</VirtualHost>
-EOF
-
 cat <<EOF > /etc/apache2/sites-available/secret.conf
 Listen 4567
 
@@ -45,13 +30,28 @@ Listen 4567
 </VirtualHost>
 EOF
 
-rm -f /etc/apache2/sites-enabled/000-default.conf
-ln -sfn /etc/apache2/sites-enabled/public.conf /etc/apache2/sites-available/public.conf
-ln -sfn /etc/apache2/sites-enabled/secret.conf /etc/apache2/sites-available/secret.conf
+cat <<EOF > /etc/apache2/sites-available/githubfake134.conf
+<VirtualHost *:80>
+    ServerName githubfake134.com
+    DocumentRoot /var/www/githubfake134
+</VirtualHost>
+EOF
+
+cat <<EOF > /etc/apache2/sites-available/microsoftfake134.conf
+<VirtualHost *:80>
+    ServerName microsoftfake134.com
+    DocumentRoot /var/www/microsoftfake134
+</VirtualHost>
+EOF
+
+a2dissite 000-default
+a2ensite public
+a2ensite secret
+a2ensite githubfake134
+a2ensite microsoftfake134
 
 mkdir -p /var/www/public
 mkdir -p /var/www/secret
-
 mkdir -p /var/www/githubfake134
 mkdir -p /var/www/microsoftfake134
 
@@ -84,3 +84,5 @@ EOF
 
 mkdir -p /var/www/secret/base64
 mkdir -p /var/www/secret/dns
+
+service apache2 restart
