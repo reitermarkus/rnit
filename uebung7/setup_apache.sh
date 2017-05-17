@@ -12,10 +12,8 @@ chmod -R g+wr /var/www
 
 cat <<EOF > /etc/apache2/sites-available/public.conf
 <VirtualHost *:80>
-  ServerAdmin webmaster@localhost
+  ServerName G134ReiterKaltschmid
   DocumentRoot /var/www/public
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 EOF
 
@@ -23,24 +21,22 @@ cat <<EOF > /etc/apache2/sites-available/secret.conf
 Listen 4567
 
 <VirtualHost *:4567>
-  ServerAdmin webmaster@localhost
+  ServerName G134ReiterKaltschmid
   DocumentRoot /var/www/secret
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 EOF
 
 cat <<EOF > /etc/apache2/sites-available/githubfake134.conf
 <VirtualHost *:80>
-    ServerName githubfake134.com
-    DocumentRoot /var/www/githubfake134
+  ServerName githubfake134.com
+  DocumentRoot /var/www/githubfake134
 </VirtualHost>
 EOF
 
 cat <<EOF > /etc/apache2/sites-available/microsoftfake134.conf
 <VirtualHost *:80>
-    ServerName microsoftfake134.com
-    DocumentRoot /var/www/microsoftfake134
+  ServerName microsoftfake134.com
+  DocumentRoot /var/www/microsoftfake134
 </VirtualHost>
 EOF
 
