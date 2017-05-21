@@ -11,6 +11,9 @@
 *.synctex.gz
 
 
+# R
+.rhistory
+
 uebung6/HAbwA
 uebung6/Heiner
 !uebung6/uebung6-1a.pdf
