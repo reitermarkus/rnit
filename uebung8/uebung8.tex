@@ -7,7 +7,6 @@
 \usepackage{enumitem}
 
 \usepackage{siunitx}
-\usepackage{eurosym}
 \sisetup{per-mode = symbol, binary-units = true}
 \DeclareSIUnit\mbyte{Byte}
 
@@ -115,15 +114,15 @@
 		\begin{align*}
 			576 \cdot \SI{649}{\gram} = \SI{373824}{\gram} = \SI{373,824}{\kilogram}
 		\end{align*}
-		Alle Festplatte passen also in einen LKW.
+		Alle Festplatten passen also in einen LKW.
 		
 		\item 
 		\begin{align*}
-			365 \euro \cdot 576 = 210240\euro
+			365 \text{€} \cdot 576 = 210240\text{€}
 		\end{align*}
 				
 		\item 
-		Entfernung von Innsbruck nach Trient beträgt \SI{177}{\kilo\metre}. Durchschnittsgeschwindigkeit von \SI{60}{\kilo\metre\per\hour} würde die Fahrt ca \SI{3}{\hour} dauern. 
+		Die Entfernung von Innsbruck nach Trient beträgt \SI{177}{\kilo\metre}. Bei einer Durchschnittsgeschwindigkeit von \SI{60}{\kilo\metre\per\hour} würde die Fahrt ca \SI{3}{\hour} dauern. 
 		\begin{align*}
 			\SI{3}{\hour} = \SI{10800}{\second}			
 		\end{align*}
@@ -131,4 +130,29 @@
 			\frac{\SI{5,76}{\peta\byte}}{\SI{10800}{\second}} = \SI{0,5333}{\tera\byte\per\second}		
 		\end{align*}
 	\end{enumerate}
+\section*{6}
+	Zipfsches Gesetz:
+	\begin{align*}
+		p(n) = \frac{1}{n \cdot \ln(1.78 \cdot n) }
+	\end{align*}
+	Berechnung:
+	\begin{align*}
+	p(48) = 1/(48 \cdot \ln(1.78 \cdot 48)) = 0,004683948 \\
+	p(47) = 1/(47 \cdot \ln(1.78 \cdot 48)) = 0,004783607 \\
+	p(46) = 1/(46 \cdot \ln(1.78 \cdot 48)) = 0,004887598 \\
+	p(45) = 1/(45 \cdot \ln(1.78 \cdot 48)) = 0,004996212 \\
+	p(44) = 1/(44 \cdot \ln(1.78 \cdot 48)) = 0,005109762 \\
+	p(43) = 1/(43 \cdot \ln(1.78 \cdot 48)) = 0,005228594 \\
+	p(42) = 1/(42 \cdot \ln(1.78 \cdot 48)) = 0,005353084 \\
+	p(41) = 1/(41 \cdot \ln(1.78 \cdot 48)) = 0,005483647 \\
+	p(40) = 1/(40 \cdot \ln(1.78 \cdot 48)) = 0,005620738 \\
+	p(39) = 1/(39 \cdot \ln(1.78 \cdot 48)) = 0,005764860  \\
+	\\
+	p(39)+p(40)+p(41)+p(42)+(43)+p(44) \\
+	+p(45)+p(46)+p(47)+p(48) = 0,05191205 \\
+	\\
+	48 - 9 = 39	
+	\end{align*}
+	Es müssen mindestens 39 Themen gelernt werden um die Prüfung mit einer Wahrscheinlichkeit von 95 \% zu bestehen.
+	
 \end{document}
