@@ -51,11 +51,11 @@ def page_ranks_to_latex(page_ranks)
   lines << "\\begin{tabular}{|l|*{#{keys.size}}{c|}}"
 
   lines << '  \hline'
-  lines << "  Iteration & #{keys.join(" & ")} \\\\"
+  lines << "  Iteration & #{keys.join(' & ')} \\\\"
   lines << '  \hline'
 
   page_ranks.each_with_index do |iteration, i|
-    lines << "  #{i + 1} & #{iteration.values.map { |rat| "$\\frac{#{rat.numerator}}{#{rat.denominator}}$"}.join(' & ')} \\\\"
+    lines << "  #{i + 1} & #{iteration.values.map { |rat| "$\\frac{#{rat.numerator}}{#{rat.denominator}}$" }.join(' & ')} \\\\"
     lines << '  \hline'
   end
 
