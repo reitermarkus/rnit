@@ -7,6 +7,7 @@
 \usepackage{enumitem}
 
 \usepackage{siunitx}
+\usepackage{eurosym}
 \sisetup{per-mode = symbol, binary-units = true}
 \DeclareSIUnit\mbyte{Byte}
 
@@ -106,4 +107,33 @@
 
   \end{enumerate}
 
+\section*{2}
+	Festplatte Seagate SkyHawk mit 10tb Speicherkapazität kostet 365€ und wiegt 649g (Daten Amazon)
+	\begin{enumerate}[label=\alph*)]
+		\item 
+		\begin{align*}
+			\SI{5,76}{\peta\byte} = \SI{5760}{\tera\byte}
+		\end{align*}
+		\begin{align*}
+			\frac{5760}{10} = 576 \text{ Festplatten}
+		\end{align*}
+		\begin{align*}
+			576 \cdot \SI{649}{\gram} = \SI{373824}{\gram} = \SI{373,824}{\kilogram}
+		\end{align*}
+		Alle Festplatte passen also in einen LKW.
+		
+		\item 
+		\begin{align*}
+			365 \euro \cdot 576 = 210240\euro
+		\end{align*}
+				
+		\item 
+		Entfernung von Innsbruck nach Trient beträgt \SI{177}{\kilo\metre}. Durchschnittsgeschwindigkeit von \SI{60}{\kilo\metre\per\hour} würde die Fahrt ca \SI{3}{\hour} dauern. 
+		\begin{align*}
+			\SI{3}{\hour} = \SI{10800}{\second}			
+		\end{align*}
+		\begin{align*}
+			\frac{\SI{5,76}{\peta\byte}}{\SI{10800}{\second}} = \SI{0,5333}{\tera\byte\per\second}		
+		\end{align*}
+	\end{enumerate}
 \end{document}
