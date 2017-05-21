@@ -19,92 +19,87 @@
 \section*{1}
   \begin{enumerate}[label=\alph*)]
     \item
-      \begin{enumerate}
-        \item
-        \ 
-        \begin{tabular}{|*{3}{c|}}
+    \begin{enumerate}[label=\Roman*)]
+      \item
+      \begin{tabular}{|*{3}{c|}}
+        \hline
+        $v_i$ & $B_i$ & $O_i$ \\
+        \hline
+        A & \{B, D\} & \{B\}    \\
+        \hline
+        B & \{A, D\} & \{A, C\} \\
+        \hline
+        C & \{B\}    & \{D, E\} \\
+        \hline
+        D & \{C, E\} & \{A, B\} \\
+        \hline
+        E & \{C\}    & \{D\}    \\
+        \hline
+      \end{tabular}
+      \begin{doublespacing}
+        \begin{tabular}{|l|*{5}{c|}}
           \hline
-          $v_i$ & $B_i$ & $O_i$ \\
+          Iteration & A & B & C & D & E \\
           \hline
-          A & \{B, D\} & \{B\}    \\
+          1 & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
           \hline
-          B & \{A, D\} & \{A, C\} \\
+          2 & $\frac{1}{5}$ & $\frac{3}{10}$ & $\frac{1}{10}$ & $\frac{3}{10}$ & $\frac{1}{10}$ \\
           \hline
-          C & \{B\}    & \{D, E\} \\
+          3 & $\frac{3}{10}$ & $\frac{7}{20}$ & $\frac{3}{20}$ & $\frac{3}{20}$ & $\frac{1}{20}$ \\
           \hline
-          D & \{C, E\} & \{A, B\} \\
+          4 & $\frac{1}{4}$ & $\frac{3}{8}$ & $\frac{7}{40}$ & $\frac{1}{8}$ & $\frac{3}{40}$ \\
           \hline
-          E & \{C\}    & \{D\}    \\
+          5 & $\frac{1}{4}$ & $\frac{5}{16}$ & $\frac{3}{16}$ & $\frac{13}{80}$ & $\frac{7}{80}$ \\
           \hline
-        \end{tabular}
-
-        \begin{doublespacing}
-          \begin{tabular}{|l|*{5}{c|}}
-            \hline
-            Iteration & A & B & C & D & E \\
-            \hline
-            1 & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
-            \hline
-            2 & $\frac{1}{5}$ & $\frac{3}{10}$ & $\frac{1}{10}$ & $\frac{3}{10}$ & $\frac{1}{10}$ \\
-            \hline
-            3 & $\frac{3}{10}$ & $\frac{7}{20}$ & $\frac{3}{20}$ & $\frac{3}{20}$ & $\frac{1}{20}$ \\
-            \hline
-            4 & $\frac{1}{4}$ & $\frac{3}{8}$ & $\frac{7}{40}$ & $\frac{1}{8}$ & $\frac{3}{40}$ \\
-            \hline
-            5 & $\frac{1}{4}$ & $\frac{5}{16}$ & $\frac{3}{16}$ & $\frac{13}{80}$ & $\frac{7}{80}$ \\
-            \hline
-            6 & $\frac{19}{80}$ & $\frac{53}{160}$ & $\frac{5}{32}$ & $\frac{29}{160}$ & $\frac{3}{32}$ \\
-            \hline
-            7 & $\frac{41}{160}$ & $\frac{21}{64}$ & $\frac{53}{320}$ & $\frac{11}{64}$ & $\frac{5}{64}$ \\
-            \hline
-            8 & $\frac{1}{4}$ & $\frac{219}{640}$ & $\frac{21}{128}$ & $\frac{103}{640}$ & $\frac{53}{640}$ \\
-            \hline
-          \end{tabular}
-        \end{doublespacing}
-
-        \begin{tabular}{|*{3}{c|}}
+          6 & $\frac{19}{80}$ & $\frac{53}{160}$ & $\frac{5}{32}$ & $\frac{29}{160}$ & $\frac{3}{32}$ \\
           \hline
-          $v_i$ & $B_i$ & $O_i$    \\
+          7 & $\frac{41}{160}$ & $\frac{21}{64}$ & $\frac{53}{320}$ & $\frac{11}{64}$ & $\frac{5}{64}$ \\
           \hline
-          A & \{E\}     & \{B, C\} \\
-          \hline
-          B & \{A\}     & \{C\}    \\
-          \hline
-          C & \{A, B\}  & \{D\}    \\
-          \hline
-          D & \{C\}     & \{E\}    \\
-          \hline
-          E & \{D\}     & \{A\}    \\
+          8 & $\frac{1}{4}$ & $\frac{219}{640}$ & $\frac{21}{128}$ & $\frac{103}{640}$ & $\frac{53}{640}$ \\
           \hline
         \end{tabular}
+      \end{doublespacing}
 
-        \begin{doublespacing}
-          \begin{tabular}{|l|*{5}{c|}}
-            \hline
-            Iteration & A & B & C & D & E \\
-            \hline
-            1 & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
-            \hline
-            2 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{3}{10}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
-            \hline
-            3 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{1}{5}$ & $\frac{3}{10}$ & $\frac{1}{5}$ \\
-            \hline
-            4 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{3}{10}$ \\
-            \hline
-            5 & $\frac{3}{10}$ & $\frac{1}{10}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
-            \hline
-            6 & $\frac{1}{5}$ & $\frac{3}{20}$ & $\frac{1}{4}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
-            \hline
-            7 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{1}{5}$ \\
-            \hline
-            8 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{1}{5}$ & $\frac{1}{4}$ & $\frac{1}{4}$ \\
-            \hline
-          \end{tabular}
-        \end{doublespacing}
-
-      \end{enumerate}
-
-
+      \item
+      \begin{tabular}{|*{3}{c|}}
+        \hline
+        $v_i$ & $B_i$ & $O_i$    \\
+        \hline
+        A & \{E\}     & \{B, C\} \\
+        \hline
+        B & \{A\}     & \{C\}    \\
+        \hline
+        C & \{A, B\}  & \{D\}    \\
+        \hline
+        D & \{C\}     & \{E\}    \\
+        \hline
+        E & \{D\}     & \{A\}    \\
+        \hline
+      \end{tabular}
+      \begin{doublespacing}
+        \begin{tabular}{|l|*{5}{c|}}
+          \hline
+          Iteration & A & B & C & D & E \\
+          \hline
+          1 & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
+          \hline
+          2 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{3}{10}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
+          \hline
+          3 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{1}{5}$ & $\frac{3}{10}$ & $\frac{1}{5}$ \\
+          \hline
+          4 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{3}{10}$ \\
+          \hline
+          5 & $\frac{3}{10}$ & $\frac{1}{10}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
+          \hline
+          6 & $\frac{1}{5}$ & $\frac{3}{20}$ & $\frac{1}{4}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
+          \hline
+          7 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{1}{5}$ \\
+          \hline
+          8 & $\frac{1}{5}$ & $\frac{1}{10}$ & $\frac{1}{5}$ & $\frac{1}{4}$ & $\frac{1}{4}$ \\
+          \hline
+        \end{tabular}
+      \end{doublespacing}
+    \end{enumerate}
   \end{enumerate}
 
 \section*{2}
