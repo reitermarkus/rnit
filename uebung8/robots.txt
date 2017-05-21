@@ -1,0 +1,3 @@
+User-agent: crawling-international-agency
+User-agent: daten-kraken
+Disallow: /geheim-1337/weltformel.txt
