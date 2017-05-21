@@ -1,0 +1,309 @@
+% !TEX TS-program = xelatex
+%
+\documentclass[ngerman]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\usepackage{siunitx}
+\sisetup{per-mode = symbol, binary-units = true}
+\DeclareSIUnit\mbyte{Byte}
+
+\usepackage{stackengine}
+\usepackage[usenames, dvipsnames]{xcolor}
+
+\begin{document}
+
+\section*{1}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		T: \ \ \ \ Twisted Pair \\
+		10: \ \ \ Übertragungsrate von \SI{10}{\mega\bit\per\s} \\
+		Base: Basisband \\
+		5: \ \ \ \ \ Maximale Leitungslänge von 500 Meter \\
+		\newline
+		Medienzugriffskontrolle: CSMA/CD \\
+		Kodierung: Manchester-Code \\
+		Minimale Rahmengröße: 64 Byte \\
+		Maximale Rahmengröße: 1518 Byte \\
+
+		\item
+		Signalgeschwindigkeit = Lichtgeschwindigkeit $\cdot$ Ausbreitungsfaktor (0.77) \\
+		\newline
+		theoretische minimale Rahmengröße:
+		\begin{itemize}
+		  \item doppelte Übertragungsrate aus Toleranzgründen (Verzögerungen usw.)
+		  \item doppelte Länge für Hin und Rückweg.
+		\end{itemize}
+		\begin{align*}
+		  2 \cdot \text{Übertragungsrate} \cdot \dfrac{2 \cdot \text{Länge}}{\text{Signalgeschwindigkeit}}
+		\end{align*}
+		\begin{align*}
+		  \SI{20000000}{\bit\per\s} \cdot \dfrac{\SI{5000}{\m}}{\SI{231000000}{\ms}}
+		\end{align*}
+		\begin{align*}
+		  \SI{20000000}{\bit\per\s} \cdot 0,00002164 = \SI{432}{\bit} = \SI{54}{\mbyte}
+		\end{align*}
+		\item
+		10G: \  \ Übertragungsrate von \SI{10}{\giga\bit\per\s} \\
+		Base: \ Basisband \\
+		T: \ \ \ \ \ Twisted Pair \\
+		\newline
+		Im Vergleich zu T10Base5:
+		\begin{itemize}
+			\item kürzere Reichweite (\SI{100}{\m})
+			\item höhere Übertragungsreichweite (\SI{10}{\giga\bit\per\s})
+			\item andere Kodierung: 128-DSQ, LDPC
+		\end{itemize}
+		\item
+		Nach fünf 1en wird immer eine 0 eingefügt. \\
+		01111110 markiert Anfang und Ende. \\
+		\newline
+		01111\underline{01111110}0000011111{\textcolor{ForestGreen}{\textbf{0}}}01011111{\textcolor{ForestGreen}{\textbf{0}}}1 \\
+	\end{enumerate}
+
+\section*{2}
+
+	\begin{enumerate}[label=\alph*)]
+	\item
+	\begin{tabular}{cc}
+		\begin{minipage}{.5\linewidth}
+			\begin{enumerate}[label=\roman*)]
+				\item
+				\begin{tabular} {c c c c c c }
+					1 & 1 & 0 & 1 & \  & 0                             \\
+					1 & 0 & 1 & 1 & \  & 1                             \\
+					1 & 1 & 0 & 1 & \  & 1                             \\
+					1 & 0 & 1 & 0 & \  & 0                             \\
+					  &   &   &   &    &                               \\
+					1 & 0 & 0 & 1 &    &                               \\
+				\end{tabular}
+				\newline
+				\newline
+				\item
+				\begin{tabular} {c c c c c c }
+					0 & 0 & 1 & 1 & \  & 0                             \\
+					0 & 1 & 0 & 1 & \  & {\textcolor{red}{\textbf{1}}} \\
+					1 & 0 & 1 & 0 & \  & {\textcolor{red}{\textbf{1}}} \\
+					1 & 0 & 1 & 1 & \  & 1                             \\
+				 	  &   &   &   &    &                               \\
+					0 & 0 & 1 & 0 &    &                               \\
+				\end{tabular}
+				\newline
+				\newline
+				\item
+				\begin{tabular} {c c c c c c }
+					1 & 0 & 1 & 1 & \  & 1                             \\
+					0 & 1 & 1 & 1 & \  & {\textcolor{red}{\textbf{1}}} \\
+					1 & 0 & 1 & 0 & \  & 0                             \\
+					1 & 1 & 0 & 0 & \  & 0                             \\
+					  &   &   &   &    &                               \\
+					1 & {\textcolor{red}{\textbf{1}}} & 1 & 0 &   &    \\
+				\end{tabular}
+			\end{enumerate}
+		\end{minipage} &
+
+		\begin{minipage}{.5\linewidth}
+			\begin{enumerate}[label=\roman*)]
+				\item
+				\begin{tabular} {c c c c c c }
+					1 & 1 & 0 & 1 & \  & 0                             \\
+					1 & 0 & 1 & 1 & \  & 1                             \\
+					1 & 1 & 0 & 1 & \  & 1                             \\
+					1 & 0 & 1 & 0 & \  & 0                             \\
+					  &   &   &   &    &                               \\
+					1 & 0 & 0 & 1 &    &                               \\
+				\end{tabular}
+				\newline
+				\newline
+				\item
+				\begin{tabular} {c c c c c c }
+					0 & 0 & 1 & 1 & \  & 0                             \\
+					0 & 1 & 0 & {\textcolor{ForestGreen}{\textbf{0}}} & \ & 1\\
+					1 & 0 & 1 & {\textcolor{ForestGreen}{\textbf{1}}} & \ & 1\\
+					1 & 0 & 1 & 1 & \  & 1                             \\
+					  &   &   &   &    &                               \\
+					0 & 0 & 1 & 0 &    &                               \\
+				\end{tabular}
+				\newline
+				\newline
+				\item
+				\begin{tabular} {c c c c c c }
+					1 & 0 & 1 & 1 & \  & 1                              \\
+					0 & 1 & 1 & 1 & \  & {\textcolor{ForestGreen}{\textbf{1}}}\\
+					1 & 0 & 1 & 0 & \  & 0                              \\
+					1 & 1 & 0 & 0 & \  & 0                              \\
+					  &   &   &   &    &                                \\
+					1 & {\textcolor{ForestGreen}{\textbf{1}}} & 1 & 0 & &     \\
+				\end{tabular}
+			\end{enumerate}
+		\end{minipage}
+	\end{tabular}
+  \item
+  Vorgehensweise
+
+  \begin{enumerate}[label=\arabic*)]
+    \item Von links nach rechts, mit der ersten stelle beginnend, werden die Stellen sich wiederholend mit 7, 3, 1 gewichtet.
+    \item Die jeweiligen Produkte aus beiden Zahlen werden errechnet.
+    \item Die Endziffern der Produkte werden summiert.
+    \item Die Prüfsumme ist die letzte Ziffer der Summe.
+  \end{enumerate}
+  \pagebreak
+  Prüfsumme für Seriennummer \\
+
+  \begin{tabular}{|*{4}{c |}}
+    \hline
+    NR & Gewichtung & Produkt & Endziffern     \\
+    \hline
+    4  & 7          & 28      & 8              \\
+    2  & 3          & 6       & 6              \\
+    1  & 1          & 1       & 1              \\
+    0  & 7          & 0       & 0              \\
+    1  & 3          & 3       & 3              \\
+    0  & 1          & 0       & 0              \\
+    1  & 7          & 7       & 7              \\
+    0  & 3          & 0       & 0              \\
+    \hline
+       &            &         & 2\underline{5} \\
+    \hline
+  \end{tabular} \\
+
+  Prüfsumme für Geburtsdatum \\
+
+  \begin{tabular}{|*{4}{c |}}
+    \hline
+    NR & Gewichtung & Produkt & Endziffern     \\
+    \hline
+    8  & 7          & 56      & 6              \\
+    7  & 3          & 21      & 1              \\
+    0  & 1          & 0       & 0              \\
+    7  & 7          & 49      & 9              \\
+    2  & 3          & 6       & 6              \\
+    7  & 1          & 7       & 7              \\
+    \hline
+       &            &         & 2\underline{9} \\
+    \hline
+  \end{tabular} \\
+
+  Prüfsumme für Ablaufdatum
+
+  Heiner hat die Gesamtprüfziffer 4 vorgegeben, deshalb muss die Prüfsumme beim
+  Ablaufdatum 0 sein. $5 + 9 = 1\underline{4}$. Der Ausweis wurde im Jahr 2006
+  ausgestellt und ist 10 Jahre lang valide. Für die längst mögliche Gültigkeit
+  wurde das Monat Dezember gewählt. Der Tag wird im folgendem noch errechnet. \\
+
+  \begin{tabular}{|*{4}{c |}}
+    \hline
+    NR & Gewichtung & Produkt & Endziffern                 \\
+    \hline
+    1  & 7          & 7       & 7              \\
+    6  & 3          & 18      & 8              \\
+    1  & 1          & 1       & 1              \\
+    2  & 7          & 14      & 4              \\
+    3  & 3          & 9       & 9              \\
+    1  & 1          & 1       & 1              \\
+    \hline
+       &            &         & 3\underline{0} \\
+    \hline
+  \end{tabular} \\
+
+  Ablaufdatum 31.12.2016. Die Gesamtprüfziffer ist immer noch 4. ($5 + 9 + 0 = 1\underline{4}$)
+
+  \item
+  \begin{itemize}
+    \item Ausweis ist nur bis 2016 gültig, daher veraltet.
+    \item unrealistisches Foto.
+    \item eventuell entspricht das Geburtsdatum nicht seinem Erscheinungsbild.
+  \end{itemize}
+\end{enumerate}
+
+
+\section*{3}
+
+\begin{enumerate}[label=\alph*)]
+  \item
+  \(
+    x^6 + x^4 + x^3 + 1 : x^3 + 1 = x^6 + x^4 + x + 1
+    \\
+    x + 1\ \text{Rest}
+    \\
+    \\
+    \stackMath\def\stackalignment{l}
+    \stackunder{%
+      1011001000 : 1001 = 1010011
+    }{%
+      \Shortstack[l]{
+        {     \underline{1001}}
+        {\textcolor{white}{1}           0100}
+        {\textcolor{white}{1}\underline{0000}}
+        {\textcolor{white}{12}           1000}
+        {\textcolor{white}{12}\underline{1001}}
+        {\textcolor{white}{123}           0011}
+        {\textcolor{white}{123}\underline{0000}}
+        {\textcolor{white}{1234}           0110}
+        {\textcolor{white}{1234}\underline{0000}}
+        {\textcolor{white}{12345}           1100}
+        {\textcolor{white}{12345}\underline{1001}}
+        {\textcolor{white}{123456}           1010}
+        {\textcolor{white}{123456}\underline{1001}}
+        {\textcolor{white}{1234567}           011\ \text{Rest}}
+      }
+    }
+  \)
+
+  \addtocounter{enumi}{3}
+  \item
+  $(x + 1)\ |\ g(x) \Leftrightarrow 11\ \text{über}\ GF(2)$
+
+  Bei Division durch 11 wird $00$ an den Dividenden angehängt. Der Rest von $0$ entsteht
+  durch Polynomdivision über $GF(2)$ bei ungerader Bitanzahl. Wenn jedoch der CRC-Wert
+  nicht 00 ist kann der Rest auch nicht 0 sein und deshalb ist nur ein gültiger CRC-Wert
+  möglich.
+\end{enumerate}
+
+
+\section*{4}
+
+\begin{enumerate}[label=\alph*)]
+  \item
+
+  Die Übertragunszeit für \SI{1}{\kilo\bit} beträgt \SI{0,001}{\second} +
+  \SI{0,25}{\second} Latenz.
+
+  ACK benötigt ca. \SI{0,25}{\second} (\SI{3}{\bit} + Latenz).
+
+  Stop-and-Wait
+  \begin{itemize}
+    \item Sender sendet Rahmen.
+    \item Empfänger sendet ACK.
+    \item Sender empfängt ACK.
+  \end{itemize}
+
+  Die Übertragungkapazität beträgt ca. \SI{2}{Rahmen\per\second} $\approx$
+  \SI{2}{\kilo\bit\per\second}
+  \pagebreak
+  \item
+  Pipelining
+  \begin{itemize}
+    \item Sender sendet Rahmen sequentiell.
+    \item Empfänger sendet ACKs parallel zurück.
+    \item Fehlerhafte Rahmen werden neu gesendet.
+  \end{itemize}
+
+  Sendezeit = \SI{0,5}{\second}
+
+  \begin{itemize}
+    \item \SI{0,25}{\second} Latenz vor Empfang des ersten Rahmens
+    \item \SI{0,25}{\second} Latenz vor Empfang des ersten ACK
+  \end{itemize}
+
+  Ein Rahmen benötige \SI{0,001}{\second} und ein ACK \SI{0,000003}{\second}.
+
+  Annahme: 1000 Rahmen + 1000 ACK = \SI{1,003}{\second}
+
+  Die Übertragungkapazität beträgt ca. \SI{500}{Rahmen\per\second} $\approx$
+  \SI{500}{\kilo\bit\per\second}
+\end{enumerate}
+
+\end{document}

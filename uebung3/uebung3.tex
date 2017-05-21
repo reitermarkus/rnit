@@ -1,0 +1,126 @@
+% !TEX TS-program = xelatex
+%
+\documentclass[ngerman]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\usepackage{siunitx}
+\sisetup{per-mode = symbol, binary-units = true}
+
+
+\begin{document}
+
+\section*{1}
+
+\begin{enumerate}[label=\alph*)]
+  \item
+  \begin{align*}
+    \text{normalisierter Durchsatz S} &= \frac{\SI{2000}{\bit}}{\SI{50}{\s}} = \SI{40}{\bit\per\s}\\
+  \end{align*}
+
+  \begin{align*}
+    \frac{\SI{2}{\mega\bit\per\s}}{\SI{40}{\bit\per\s}} = 50000\ \text{Sender}
+  \end{align*}
+
+  \item
+  \begin{align*}
+    \begin{split}
+      \text{ALOHA}\\
+      \\
+      \lim_{N \to \infty} \text{S} &= 1 \cdot e^{-2 \cdot 1} = 0,1353352832\\
+      \lim_{N \to \infty} \text{S} &= 2 \cdot e^{-2 \cdot 4} = 0,03663127778\\
+      \lim_{N \to \infty} \text{S} &= 10 \cdot e^{-2 \cdot 10} = 0,000000020611536
+    \end{split}
+    \begin{split}
+      \text{S-ALOHA}\\
+      \\
+      \lim_{N \to \infty} \text{S} &= 1 \cdot e^{-1} = 0,3678794412\\
+      \lim_{N \to \infty} \text{S} &= 2 \cdot e^{-2} = 0,2706705665\\
+      \lim_{N \to \infty} \text{S} &= 10 \cdot e^{-10} = 0,0004539992976
+    \end{split}
+  \end{align*}
+
+  Bei kleinen Gs ist der Unterschied der maximalen normalisierten Durchsätze noch nicht so dramatisch,
+  da auch die Wahrscheinlichkeit für erfolgreiches Senden bei kleinen Gs näher beieinander liegt.
+
+  \item
+  \begin{align*}
+    \text{Übertragungszeit} = \frac{\SI{1}{\km}}{\SI{250000}{\km\per\s}} = \SI{0,004}{\s} = \SI{4}{\ms}
+  \end{align*}
+
+  Die minimale Länge der Nachricht muss $2\tau$ Übertragungszeit haben:
+
+  \begin{align*}
+    \text{minimale Nachrichtengröße} = \SI{2}{\giga\bit\per\s} \cdot \SI{0,004}{\s} = \SI{8000000}{\bit} = \SI{8}{\mega\byte}
+  \end{align*}
+\end{enumerate}
+
+
+\section*{2}
+
+\begin{enumerate}[label=\alph*)]
+  \item
+  Methoden:
+  \begin{itemize}
+    \item BPSK (binary phase shift keyring)
+    \item ASK (Amplitude-shift keying)
+    \item FSK(Frequency Shift keyring)
+  \end{itemize}
+
+  Vorteile:
+  \begin{itemize}
+    \item Für die selbe „Bit Error Rate“ wird gegenüber BPSK die halbe Bandbreite gebraucht.
+    \item Aufgrund der reduzierten Bandbreite ist auch die Informations-Übertragungsrate höher.
+    \item Geringere Fehler-Wahrscheinlichkeit gegenüber ASK und FSK.
+  \end{itemize}
+
+  \addtocounter{enumi}{2}
+  \item
+  8-PSK ist eine Erweiterung von QPSK.
+
+  QPSK-Methoden, die in der Praxis verwendet werden:
+  \begin{itemize}
+    \item DVB-S QPSK
+    \item DVB-S2 QPSK
+  \end{itemize}
+\end{enumerate}
+
+
+\section*{3}
+
+\begin{enumerate}[label=\alph*)]
+  \item
+  Der Leitungscode legt bei der digitalen Telekommunikation fest, wie die zur
+  Informationsübertragung genutzten Symbole auf der physischen Ebene übertragen werden.
+
+  \addtocounter{enumi}{2}
+  \item
+  Vorteile vom Manchester-Encoding:
+  \begin{itemize}
+    \item Signal synchronisiert sich selbst.
+    \item Geringe Fehlerrate und zuverlässige Übertragung durch „Self-Clocking“.
+  \end{itemize}
+
+  Nachteile vom Manchester-Encoding:
+  \begin{itemize}
+    \item Modulations-Bandbreite zweimal höher als bei NRZ.
+    \item Relativ komplexes dekodieren.
+  \end{itemize}
+
+  Vorteile vom 4B5B-Encoding:
+  \begin{itemize}
+    \item Benötigt weniger Bandbreite gegenüber dem Manchester-Encoding.
+  \end{itemize}
+\end{enumerate}
+
+
+\section*{4}
+
+\begin{enumerate}[label=\alph*)]
+  \item
+  Jeder Kanal hat eine eigene Chip-Sequenz. Für eine 1 wird ein positiver Chip gesendet, und für eine 0 ein negativer. Der Empfänger muss den Chip zu jeder Empfangsfolge addieren, und kann somit das Signal demultiplexen.
+\end{enumerate}
+
+\end{document}

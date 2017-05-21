@@ -1,0 +1,78 @@
+% !TEX TS-program = xelatex
+%
+\documentclass[ngerman]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\begin{document}
+
+\section*{4}
+
+\begin{enumerate}[label=\alph*)]
+  \item
+  \[
+    Abtastrate = \frac{1}{\Delta t}\ Hz = \frac{1}{\frac{1}{1000}}\ Hz = 1000\ Hz
+  \]
+
+  \[
+    b_{max} \leq 2 \cdot B \cdot \log_{2}{v}\ bit/s
+      =
+    2 \cdot 4000 \cdot \log_{2}{2}\ bit/s
+      =
+    8000\ bit/s
+  \]
+
+  $v$ kann hier aber auch $\infty$ sein.
+  \item
+  \[
+    b_{max} \leq 2 \cdot 6000000 \cdot log_{2}{4}\ bit/s
+      =
+    24000000\ bit/s
+      =
+    24\ Mbit/s
+  \]
+  \item
+  3000-Hz-Kanal mit S/R = 20 dB
+
+  \begin{align*}
+    \begin{split}
+      b_{max} \leq{}& 2 \cdot B \cdot \log_{2}{(1 + S/R)}\ bit/s\\
+                 ={}& 3000 \cdot log_{2}{(1 + 100)}\ bit/s\\
+           \approx{}& 13,17\ kbit/s\\
+    \end{split}
+    \begin{split}
+      20 dB ={}& 10 \cdot \log_{10}{x}\\
+       10^2 ={}& x\\
+        100 ={}& x
+    \end{split}
+  \end{align*}
+
+
+  \begin{align*}
+    b_{max} \leq 2 \cdot 3 kHz \cdot log_{2}{2} = 6 kbit/s
+  \end{align*}
+
+
+  \item
+  50000-Hz-Kanal mit $S/R = 20 dB$
+
+  \begin{align*}
+    \begin{split}
+      300000 \leq{}& 50000 \cdot log_{2}{(1 + S/R)}\\
+           6 \leq{}& log_{2}{(1 + S/R)}\\
+         2^6 \leq{}& 1 + S/R\\
+          64 \leq{}& 1 + S/R\\
+          63 \leq{}& S/R
+    \end{split}
+    \begin{split}
+      log_{2}{y} ={}& x\\
+           2^{x} ={}& y
+    \end{split}
+  \end{align*}
+
+  Die maximale Toleranz für das Signal-Rausch-Verhältnis ist 63 dB.
+\end{enumerate}
+
+\end{document}

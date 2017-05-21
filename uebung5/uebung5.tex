@@ -1,0 +1,123 @@
+% !TEX TS-program = xelatex
+%
+\documentclass[ngerman]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\usepackage{siunitx}
+\sisetup{per-mode = symbol, binary-units = true}
+\DeclareSIUnit\mbyte{Byte}
+
+\usepackage{stackengine}
+\usepackage[usenames, dvipsnames]{xcolor}
+
+\begin{document}
+
+\section*{1}
+  \begin{itemize}
+    \item 192.168.0.25 = 0xc0a80019 = 11000000101010000000000000011001
+    \item 192.168.0.34 = 0xc0a80022 = 11000000101010000000000000100010
+    \item Payload Size = 512 Byte = 0x0200 = 1000000000
+    \item Protokoll (TCP) = 6 = 0110
+    \item IP-Header-Länge = 5 = 0101
+    \item ID = 0x2a2a
+    \item TTL = 32 = 100000
+    \item Gesamtlänge = 512 + 5 * (32 / 8) = 532 = 1000010100
+  \end{itemize}
+
+  \textbf{IP-Paket (IPv4)}
+
+	\begin{tabular}{|*{32}{c|}}
+    \hline
+    \multicolumn{4}{|c|}{Version} & \multicolumn{4}{|c|}{IP-Header-Length}  & \multicolumn{8}{|c|}{TOS} & \multicolumn{16}{|c|}{Total Length} \\
+    \hline
+    \multicolumn{16}{|c|}{Identification} & \multicolumn{3}{|c|}{Flags} & \multicolumn{13}{|c|}{Fragment Offset}  \\
+    \hline
+    \multicolumn{8}{|c|}{TTL} & \multicolumn{8}{|c|}{Protocol} & \multicolumn{16}{|c|}{Header Checksum}  \\
+    \hline
+    \multicolumn{32}{|c|}{Source Address} \\
+    \hline
+    \multicolumn{32}{|c|}{Destination Address} \\
+    \hline
+    \multicolumn{32}{|c|}{Options and Padding (optional)} \\
+    \hline
+	\end{tabular}
+
+	\begin{tabular}{|*{32}{c|}}
+    \hline
+    \multicolumn{4}{|c|}{\texttt{0100}} & \multicolumn{4}{|c|}{\texttt{0101}}  & \multicolumn{8}{|c|}{\texttt{00000000}} & \multicolumn{16}{|c|}{\texttt{0000001000010100}} \\
+    \hline
+    \multicolumn{16}{|c|}{\texttt{0010101000101010}} & \multicolumn{3}{|c|}{\texttt{010}} & \multicolumn{13}{|c|}{\texttt{0000000000000}}  \\
+    \hline
+    \multicolumn{8}{|c|}{\texttt{00100000}} & \multicolumn{8}{|c|}{\texttt{00000110}} & \multicolumn{16}{|c|}{\texttt{0000000000000000}}  \\
+    \hline
+    \multicolumn{32}{|c|}{\texttt{11000000101010000000000000011001}} \\
+    \hline
+    \multicolumn{32}{|c|}{\texttt{11000000101010000000000000100010}} \\
+    \hline
+	\end{tabular}
+
+	\begin{enumerate}[label=\alph*)]
+    \item
+    \textbf{Berechnung der Prüfsumme}
+
+    Die Prüfsumme wird mit Nullen initialisiert und alle 16-Bit-Halbwörter des Headers werden mit Einserkomplement addiert und danach negiert.
+
+    \begin{align*}
+      &     &   \texttt{0100010100000000} \\
+      &+    &   \texttt{0000001000010100} \\
+      &+    &   \texttt{0010101000101010} \\
+      &+    &   \texttt{0100000000000000} \\
+      &+    &   \texttt{0010000000000110} \\
+      &+    &   \texttt{0000000000000000} \\
+      &+    &   \texttt{1100000010101000} \\
+      &+    &   \texttt{0000000000011001} \\
+      &+    &   \texttt{1100000010101000} \\
+      &+    &   \texttt{0000000000100010} \\
+      &     & \texttt{100101001011001111} \\
+      \\ 
+      &     &   \texttt{0101001011001111} \\
+      &+    &                 \texttt{10} \\
+      &     &   \texttt{0101001011010001} \\
+      \\ 
+      &\neg &   \texttt{0101001011010001} \\
+      &     &   \texttt{1010110100101110}
+    \end{align*}
+
+
+    \item
+    \textbf{Binary-Dump des Headers}
+
+    \texttt{0100010100000000} \\ 
+    \texttt{0000001000010100} \\ 
+    \texttt{0010101000101010} \\ 
+    \texttt{0100000000000000} \\ 
+    \texttt{0010000000000110} \\ 
+    \texttt{1010110100101110} (Prüfsumme) \\ 
+    \texttt{1100000010101000} \\ 
+    \texttt{0000000000011001} \\ 
+    \texttt{1100000010101000} \\ 
+    \texttt{0000000000100010} \\ 
+
+
+    \textbf{Hex-Dump des Headers}
+
+    \texttt{450002142a2a40002006ad2ec0a80019c0a80022}
+
+
+    \item
+    IP-Pakete enthalten keine Prüfsumme der Payload-Daten, da dies durch die Transportschicht sichergestellt wird.
+	\end{enumerate}
+
+\section*{4}
+  \begin{enumerate}[label=\alph*)]
+    \addtocounter{enumi}{2}
+    \item
+    Die Wahrscheinlichkeit, dass Heiner nicht gestellt wird beträgt: \\
+    \begin{align*}
+    (1 - (0,1 \cdot 0,2 \cdot 0,3 \cdot 0,5)) \cdot 100 = 70\%
+    \end{align*}
+  \end{enumerate}
+\end{document}
