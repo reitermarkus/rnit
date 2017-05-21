@@ -27,14 +27,14 @@ Listen 4567
 EOF
 
 cat <<EOF > /etc/apache2/sites-available/githubfake134.conf
-<VirtualHost *:80>
+<VirtualHost githubfake134.com:80>
   ServerName githubfake134.com
   DocumentRoot /var/www/githubfake134
 </VirtualHost>
 EOF
 
 cat <<EOF > /etc/apache2/sites-available/microsoftfake134.conf
-<VirtualHost *:80>
+<VirtualHost microsoftfake134.com:80>
   ServerName microsoftfake134.com
   DocumentRoot /var/www/microsoftfake134
 </VirtualHost>
