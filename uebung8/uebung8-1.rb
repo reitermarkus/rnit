@@ -27,18 +27,20 @@ graph_vorlesung = {
   H: {B: [:D, :E],             O: [:A]}
 }
 
-def page_rank_k(key, graph, previous_iterations)
+def page_rank_k(key, graph, previous_iterations, damping_factor: 1)
   return Rational(1, graph.size) if previous_iterations.empty?
 
-  graph[key][:B].inject(0.to_r) { |sum, backlinking_page|
+  d = damping_factor.to_r
+
+  (1.to_r - d) / graph.size + d * graph[key][:B].inject(0.to_r) { |sum, backlinking_page|
     sum + previous_iterations.last[backlinking_page] / graph[backlinking_page][:O].size
   }
 end
 
-def page_rank(graph, iterations: 100)
+def page_rank(graph, iterations: 100, damping_factor: 1)
   iterations.times.inject([]) { |ary|
     ary << graph.keys.each_with_object({}) { |key, obj|
-      obj[key] = page_rank_k(key, graph, ary)
+      obj[key] = page_rank_k(key, graph, ary, damping_factor: damping_factor)
     }
   }
 end
@@ -69,3 +71,5 @@ end
 puts page_ranks_to_latex page_rank(graph1, iterations: 8)
 puts
 puts page_ranks_to_latex page_rank(graph2, iterations: 8)
+puts
+puts page_ranks_to_latex page_rank(graph1, iterations: 8, damping_factor: Rational(7, 10))

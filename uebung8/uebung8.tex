@@ -12,6 +12,7 @@
 
 \usepackage{setspace}% http://ctan.org/pkg/setspace
 \usepackage{lipsum}% http://ctan.org/pkg/lipsum
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -99,6 +100,33 @@
         \end{tabular}
       \end{doublespacing}
     \end{enumerate}
+
+    \item
+    \resizebox{\textwidth}{!}{
+      \begin{doublespacing}
+        \begin{tabular}{|l|*{5}{c|}}
+          \hline
+          Iteration & A & B & C & D & E \\
+          \hline
+          1 & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ & $\frac{1}{5}$ \\
+          \hline
+          2 & $\frac{1}{5}$ & $\frac{27}{100}$ & $\frac{13}{100}$ & $\frac{27}{100}$ & $\frac{13}{100}$ \\
+          \hline
+          3 & $\frac{249}{1000}$ & $\frac{589}{2000}$ & $\frac{309}{2000}$ & $\frac{393}{2000}$ & $\frac{211}{2000}$ \\
+          \hline
+          4 & 0.23185 & 0.303075 & 0.163075 & 0.187925 & 0.114075 \\
+          \hline
+          5 & 0.23185 & 0.28806875 & 0.16607625 & 0.19692875 & 0.11707625 \\
+          \hline
+          6 & 0.229749125 & 0.2912200625 & 0.1608240625 & 0.2000800625 & 0.1181266875 \\
+          \hline
+          7 & 0.23195504375 & 0.290852409375 & 0.161927021875 & 0.198977103125 & 0.116288421875 \\
+          \hline
+          8 & 0.231440329375 & 0.29201051671875 & 0.16179834328125 & 0.19807635296875 & 0.11667445765625 \\
+          \hline
+        \end{tabular}
+      \end{doublespacing}
+    }
   \end{enumerate}
 
 \section*{2}
