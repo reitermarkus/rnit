@@ -5,6 +5,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{amsmath}
 \usepackage{enumitem}
+\usepackage{graphicx}
 
 \usepackage{siunitx}
 \sisetup{per-mode = symbol, binary-units = true}
@@ -13,7 +14,7 @@
 \usepackage{setspace}% http://ctan.org/pkg/setspace
 \usepackage{lipsum}% http://ctan.org/pkg/lipsum
 \usepackage{graphicx}
-
+\graphicspath {{assets/}}
 \begin{document}
 
 \section*{1}
@@ -164,31 +165,29 @@
 			\frac{\SI{5,76}{\peta\byte}}{\SI{10800}{\second}} = \SI{0,5333}{\tera\byte\per\second}		
 		\end{align*}
 	\end{enumerate}
-\section*{6}
-	Zipfsches Gesetz:
-	\begin{align*}
-		p(n) = \frac{1}{n \cdot \ln(1.78 \cdot n) }
-	\end{align*}
-	Berechnung:
-	\begin{align*}
-	p(48) = 1/(48 \cdot \ln(1.78 \cdot 48)) = 0,004683948 \\
-	p(47) = 1/(47 \cdot \ln(1.78 \cdot 48)) = 0,004783607 \\
-	p(46) = 1/(46 \cdot \ln(1.78 \cdot 48)) = 0,004887598 \\
-	p(45) = 1/(45 \cdot \ln(1.78 \cdot 48)) = 0,004996212 \\
-	p(44) = 1/(44 \cdot \ln(1.78 \cdot 48)) = 0,005109762 \\
-	p(43) = 1/(43 \cdot \ln(1.78 \cdot 48)) = 0,005228594 \\
-	p(42) = 1/(42 \cdot \ln(1.78 \cdot 48)) = 0,005353084 \\
-	p(41) = 1/(41 \cdot \ln(1.78 \cdot 48)) = 0,005483647 \\
-	p(40) = 1/(40 \cdot \ln(1.78 \cdot 48)) = 0,005620738 \\
-	p(39) = 1/(39 \cdot \ln(1.78 \cdot 48)) = 0,005764860  \\
-	\\
-	p(39)+p(40)+p(41)+p(42)+(43)+p(44) \\
-	+p(45)+p(46)+p(47)+p(48) = 0,05191205 \\
-	\\
-	48 - 9 = 39	
-	\end{align*}
-	Es müssen mindestens 39 Themen gelernt werden um die Prüfung mit einer Wahrscheinlichkeit von 95 \% zu bestehen.
 
+\section*{3}
+	\begin{align*}
+		\includegraphics[height=4cm]{assets/github.png}
+		\includegraphics[height=4cm]{assets/uibk.png}
+	\end{align*}
+	github.com wie auch uibk.ac.at bauen keine weiteren Verbindungen auf. 
+	\begin{align*}
+		\includegraphics[height=5cm]{assets/google.png}
+	\end{align*}
+	google.com speichert Cookies welche zur weiteren Verfolgung verwendet werden können.
+	\begin{align*}
+		\includegraphics[height=6.5cm]{assets/youtube.png}
+	\end{align*}
+	youtube.com speichert Cookies und baut Verbindungen zu weiteren google Diensten auf welche zur weiteren Verfolgung verwendet werden können.
+	\begin{align*}
+		\includegraphics[height=5cm]{assets/w3school.png}
+	\end{align*}
+	w3school.org speichert Cookies und baut eine Verbindung zu google analytics auf welche zur weiteren Verfolgung verwendet werden können.
+	\begin{align*}
+		\includegraphics[height=5cm]{assets/msdn.png}
+	\end{align*}
+	msdn.microsoft.com speichert Cookies und baut Verbindungen zu microsoft Diensten auf.
 \section*{5}
   \begin{enumerate}[label=\alph*)]
     \addtocounter{enumi}{1}
@@ -197,5 +196,32 @@
     da ein Bot sich nicht an die vorgegebenen Regeln halten muss,
     vor allem nicht einer eines ausländischen Geheimdienstes.
   \end{enumerate}
+
+\pagebreak
+\section*{6}
+	Zipfsches Gesetz:
+	\begin{align*}
+		p(n) = \frac{1}{n \cdot \ln(1.78 \cdot n) }
+	\end{align*}
+	Berechnung:
+	\begin{align*}
+		p(48) = 1/(48 \cdot \ln(1.78 \cdot 48)) = 0,004683948 \\
+		p(47) = 1/(47 \cdot \ln(1.78 \cdot 48)) = 0,004783607 \\
+		p(46) = 1/(46 \cdot \ln(1.78 \cdot 48)) = 0,004887598 \\
+		p(45) = 1/(45 \cdot \ln(1.78 \cdot 48)) = 0,004996212 \\
+		p(44) = 1/(44 \cdot \ln(1.78 \cdot 48)) = 0,005109762 \\
+		p(43) = 1/(43 \cdot \ln(1.78 \cdot 48)) = 0,005228594 \\
+		p(42) = 1/(42 \cdot \ln(1.78 \cdot 48)) = 0,005353084 \\
+		p(41) = 1/(41 \cdot \ln(1.78 \cdot 48)) = 0,005483647 \\
+		p(40) = 1/(40 \cdot \ln(1.78 \cdot 48)) = 0,005620738 \\
+		p(39) = 1/(39 \cdot \ln(1.78 \cdot 48)) = 0,005764860  \\
+		\\
+		p(39)+p(40)+p(41)+p(42)+(43)+p(44) \\
+		+p(45)+p(46)+p(47)+p(48) = 0,05191205 \\
+		\\
+		48 - 9 = 39	
+	\end{align*}
+	Es müssen mindestens 39 Themen gelernt werden um die Prüfung mit einer Wahrscheinlichkeit von 95 \% zu bestehen.
+
 
 \end{document}
