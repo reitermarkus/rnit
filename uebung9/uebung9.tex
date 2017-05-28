@@ -38,5 +38,18 @@
   \end{enumerate}
 
 \section*{2}
+  \begin{enumerate}[label=\alph*)]
+    \item
+      Das Lesegerät sucht zuerst nach Tags anhand des höchstwertigen Bits, falls nur ein Tag antwortet, wurde er eindeutig indentifiziert, falls mehrere antworten, wird nach dem nächst-niedrigeren Bit gesucht. Dies wird solange wiederholt, bis nur noch ein einziger Tag antwortet oder das letzte Bit erreicht ist.
+    \item
+      Addressraum = $l = \SI{6}{\bit}$ \\
+      Mögliche Tags = n = $2^l = 2^6 = 64$
 
+      Laut der Komplexität von binären Suchbäumen ist die Anzahl der erwarteten Anfragen
+
+      \begin{itemize}
+        \item im Durchschnitt: $log(n) = log(64) \approx 1,8$ \\
+        \item im schlimmsten Fall: $n = 64$
+      \end{itemize}
+  \end{enumerate}
 \end{document}
