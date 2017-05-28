@@ -1,0 +1,42 @@
+% !TEX TS-program = xelatex
+%
+\documentclass[ngerman]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\usepackage{siunitx}
+\sisetup{per-mode = symbol, binary-units = true}
+\DeclareSIUnit\mbyte{Byte}
+
+\begin{document}
+
+\section*{1}
+  \begin{enumerate}[label=\alph*)]
+    \item
+      Der Frequenzbereich zwischen \SI{883,6}{\mega\hertz} und \SI{889,8}{\mega\hertz} wird/wurde von der Mobilkom Austria verwendet.
+
+      \begin{align*}
+        f &= \SI{888}{\mega\hertz} \\
+        \text{Wellenlänge}\ \lambda &= \frac{c}{f} \\
+        \text{Wellenlänge}\ \lambda &= \frac{\SI{299792}{\kilo\meter\per\second}}{\SI{888}{\mega\hertz}} = \SI{33,76036036}{\centi\meter}
+      \end{align*}
+
+    \item
+      \begin{align*}
+        d + (k + \frac{1}{2}) \lambda = 0 \\
+        d + (\lambda k + \frac{\lambda}{2}) &= 0 \\
+        d + \frac{\lambda}{2} &= -\lambda k \\
+        -\frac{d + \frac{\lambda}{2}}{\lambda} &= k \\
+        -\frac{d}{\lambda} + \frac{1}{2} &= k \\
+        -\frac{\SI{2}{\kilo\meter}}{\SI{33,76036036}{\centi\meter}} + \frac{1}{2} &= k \\
+        5924,1073811176 + \frac{1}{2} &= k = 5924,6073811176
+      \end{align*}
+
+      Der Spiegel muss an der Position (1000; 5924,6073811176) aufgestellt werden.
+  \end{enumerate}
+
+\section*{2}
+
+\end{document}
