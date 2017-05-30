@@ -15,10 +15,28 @@
 
 	if(mysqli_num_rows($result) == 1) {
 		$query = $con->query("SELECT spyname FROM spytable");
+		$spys = "";
 		while($row = $query->fetch_array(MYSQLI_ASSOC)) {
-			echo "<p>" . $row["spyname"] . "</p>";
+			$spys .= "<p>" . $row["spyname"] . "</p>";
 		}
+
+		$ip = getenv('HTTP_CLIENT_IP')?:getenv('HTTP_X_FORWARDED_FOR')?:getenv('HTTP_X_FORWARDED')?:
+				getenv('HTTP_FORWARDED_FOR')?:getenv('HTTP_FORWARDED')?:getenv('REMOTE_ADDR');
+
+		$obj = (object) [
+			"spy" => $name,
+			"ip" => $ip,
+			"timestamp" => date('Y-m-d H:i:s'),
+			"spys" => $spys,
+		];
+
+		echo json_encode($obj);
+
 	} else {
-		echo "<p class='error'> Benutzer und Passwort stimmen nicht überein. </p>";
+		$obj = (object) [
+			"error" => "<p class='error'> Benutzer und Passwort stimmen nicht überein. </p>"
+		];
+
+		echo json_encode($obj);
 	}
 ?>
