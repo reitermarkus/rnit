@@ -1,3 +1,5 @@
+% !TEX TS-program = xelatex
+%
 \documentclass[t]{beamer}
 
 \usepackage{lmodern}
@@ -33,7 +35,7 @@
       \item Was sind Sockets?
       \item Aufbau von Sockets
       \item Typen: TCP und UDP
-      \item Änderungen von v4 zu v5
+      \item Änderungen von SOCKSv4 zu SOCKSv5
       \item Ausblick
       \item Beispiel
     \end{itemize}
@@ -128,5 +130,16 @@
         \end{adjustbox}
     \end{itemize}
   \end{frame}
-
+  \begin{frame}{Änderungen von SOCKSv4 zu SOCKSv5}
+	\begin{itemize}
+		\item
+		Auflösung von Domains
+		\item
+		Kommunikation mittels UDP	
+		\item
+		Unterstützung von IPv6
+		\item
+		Verwendbar mit sicherer / stärkerer Authentifizierung
+  	\end{itemize}
+  \end{frame}
 \end{document}
