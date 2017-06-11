@@ -78,4 +78,55 @@
         Sonst wird eine Methoden-spezifische Authentifizierung gestartet.
     \end{itemize}
   \end{frame}
+
+  \begin{frame}{Ablauf: SOCKSv5 mit TCP}
+    \begin{itemize}
+      \item
+        Client sendet Request-Details:
+        \begin{adjustbox}{max width=\textwidth}
+          \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \texttt{VER} & \texttt{CMD}                & \texttt{RSV}         & \texttt{ATYP}            & \texttt{DST.ADDR} & \texttt{DST.PORT} \\
+            \hline
+            \texttt{05}  & \begin{tabular}{@{}l@{}}
+                             \texttt{01} CONNECT \\ 
+                             \texttt{02} BIND  \\ 
+                             \texttt{03} UDP ASSOCIATE
+                           \end{tabular}               & \texttt{00} RESERVED & \begin{tabular}{@{}l@{}}
+                                                                                  \texttt{01} IPv4 \\ 
+                                                                                  \texttt{03} Domain \\ 
+                                                                                  \texttt{04} IPv6
+                                                                                \end{tabular}            & Adresse           & Port \\
+            \hline
+          \end{tabular}
+        \end{adjustbox}
+      \item
+        Server verarbeitet Request und antwortet:
+        \begin{adjustbox}{max width=\textwidth}
+          \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \texttt{VER} & \texttt{REP}                & \texttt{RSV}         & \texttt{ATYP}            & \texttt{DST.ADDR} & \texttt{DST.PORT} \\
+            \hline
+            \texttt{05}  & \begin{tabular}{@{}l@{}}
+                             \texttt{00} succeeded \\
+                             \texttt{01} general SOCKS server failure \\
+                             \texttt{02} connection not allowed by ruleset \\
+                             \texttt{03} Network unreachable \\
+                             \texttt{04} Host unreachable \\
+                             \texttt{05} Connection refused \\
+                             \texttt{06} TTL expired \\
+                             \texttt{07} Command not supported \\
+                             \texttt{08} Address type not supported \\
+                             \texttt{09} – \texttt{FF} unassigned \\
+                           \end{tabular}               & \texttt{00} RESERVED & \begin{tabular}{@{}l@{}}
+                                                                                  \texttt{01} IPv4 \\ 
+                                                                                  \texttt{03} Domain \\ 
+                                                                                  \texttt{04} IPv6
+                                                                                \end{tabular}            & Adresse           & Port \\
+            \hline
+          \end{tabular}
+        \end{adjustbox}
+    \end{itemize}
+  \end{frame}
+
 \end{document}
