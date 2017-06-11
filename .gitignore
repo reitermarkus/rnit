@@ -9,6 +9,10 @@
 *.log
 .*.lb
 *.synctex.gz
+*.toc
+*.out
+*.nav
+*.snm
 
 
 # R
