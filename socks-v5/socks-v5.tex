@@ -6,9 +6,6 @@
 
 \usepackage{multirow}
 
-\usepackage{setspace}
-\setstretch{2}
-
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
@@ -20,12 +17,15 @@
 
 \usepackage[export]{adjustbox}
 
-\subject{Seminararbeit}
 \title{SOCKSv5 (RFC 1928)}
 \author{Michael Kaltschmid and Markus Reiter}
 \date{\printdate{2017-06-13}}
 
+\usepackage{ragged2e}
+
 \begin{document}
+  \RaggedRight
+
   \maketitle
 
   \begin{frame}{Überblick}
@@ -36,6 +36,46 @@
       \item Änderungen von v4 zu v5
       \item Ausblick
       \item Beispiel
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Was sind Sockets?}
+    \begin{itemize}
+      \item vom Betriebssystem bereitgestellt
+      \item Kommunikationsendpunkt
+      \item Austausch von Daten
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Ablauf: SOCKSv5 mit TCP}
+    \begin{itemize}
+      \item
+        Client sendet Anfrage mit Versions-Identifikator \\
+        und Authentifizierungmethoden:
+        \begin{adjustbox}{max width=\textwidth}
+
+          \begin{tabular}{|c|p{4cm}|p{4cm}|}
+            \hline
+            \texttt{VER} & \texttt{NMETHODS}                      & \texttt{METHODS} \\
+            \hline
+            \texttt{05}  & Anzahl der Oktetts in \texttt{METHODS} & 1 – 255 Methoden-Oktetts \\
+            \hline
+          \end{tabular}
+        \end{adjustbox}
+      \item
+        Server wählt eine Methode in \texttt{METHODS} aus, und antwortet:
+        \begin{adjustbox}{max width=\textwidth}
+          \begin{tabular}{|c|p{8cm}|}
+            \hline
+            \texttt{VER} & \texttt{METHOD} \\
+            \hline
+            \texttt{05}  & Ein Oktett aus \texttt{METHODS}, oder \texttt{FF}, falls keine Methode akzeptabel ist. \\
+            \hline
+          \end{tabular}
+        \end{adjustbox}
+      \item
+        Client schließt die Verbindung, falls er \texttt{FF} als Antwort erhält.
+        Sonst wird eine Methoden-spezifische Authentifizierung gestartet.
     \end{itemize}
   \end{frame}
 \end{document}
