@@ -127,12 +127,12 @@
     \end{itemize}
   \end{frame}
 
-	\begin{frame}{Ansatz - Ablauf UDP}
-		\begin{itemize}
-			\item Client sendet UDP Datagram an spezifierten Port.
-			\item Server verwirft entweder die Anfrage oder sendet das entsprechendes Datagram zurück; keine Benachrichtigung in beiden Fällen.
-		\end{itemize}
-	\end{frame}
+  \begin{frame}{Ansatz - Ablauf UDP}
+    \begin{itemize}
+      \item Client sendet UDP Datagram an spezifierten Port.
+      \item Server verwirft entweder die Anfrage oder sendet das entsprechendes Datagram zurück; keine Benachrichtigung in beiden Fällen.
+    \end{itemize}
+  \end{frame}
 
   \begin{frame}{Notwendige Details - UDP Header}
     \begin{itemize}
@@ -166,34 +166,30 @@
   \end{frame}
 
   \begin{frame}{Notwendige Details - Schichtenmodell}
-		\begin{align*}
-			\includegraphics[width=\textwidth]{schichtenmodell-v2.png}
-		\end{align*}
-	\end{frame}
+    \begin{align*}
+      \includegraphics[width=\textwidth]{schichtenmodell-v2.png}
+    \end{align*}
+  \end{frame}
 
   \begin{frame}{Darstellung - UDP request}
-		\begin{align*}
-			\includegraphics[width=\textwidth]{udp-example-request.png}
-		\end{align*}
-	\end{frame}
+    \begin{align*}
+      \includegraphics[width=\textwidth]{udp-example-request.png}
+    \end{align*}
+  \end{frame}
 
   \begin{frame}{Darstellung - UDP response}
-		\begin{align*}
-			\includegraphics[width=\textwidth]{udp-example-response.png}
-		\end{align*}
-	\end{frame}
+    \begin{align*}
+      \includegraphics[width=\textwidth]{udp-example-response.png}
+    \end{align*}
+  \end{frame}
 
   \begin{frame}{Änderungen von SOCKSv4 zu SOCKSv5}
-	 \begin{itemize}
-		\item
-		Auflösung von Domains
-		\item
-		Kommunikation mittels UDP
-		\item
-		Unterstützung von IPv6
-		\item
-		Verwendbar mit sicherer / stärkerer Authentifizierung
-  	\end{itemize}
+    \begin{itemize}
+      \item Auflösung von Domains
+      \item Kommunikation mittels UDP
+      \item Unterstützung von IPv6
+      \item Verwendbar mit sicherer / stärkerer Authentifizierung
+    \end{itemize}
   \end{frame}
 
   \begin{frame}{Ausblick}
