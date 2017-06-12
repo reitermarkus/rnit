@@ -130,8 +130,40 @@
         \end{adjustbox}
     \end{itemize}
   \end{frame}
+  \begin{frame}{Ablauf: SOCKSv5 mit UDP-Client}
+    \begin{itemize}
+      \item
+       Client sendet UDP Datagram mit folgendem Header: \\ 
+       \begin{adjustbox}{max width=\textwidth}
+         \begin{tabular}{|c|c|c|c|c|c|}
+          \hline
+            \texttt{RSV} & \texttt{FRAG}                & \texttt{ATYP}         & \texttt{DST.ADDR}            & \texttt{DST.PORT} & \texttt{DATA} \\
+          \hline
+            2 & 1 & 1 & Variable & 2 & Variable \\
+          \hline
+        \end{tabular}
+      \end{adjustbox}
+      und Feldern: \\
+      \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{|c|c|c|c|c|c|}
+          \hline
+            \texttt{RSV}        & \texttt{FRAG}         & \texttt{ATYP}           & \texttt{DST.ADDR}     & \texttt{DST.PORT}     & \texttt{DATA} \\
+          \hline
+            \texttt{Reserved X'0000'} & \texttt{fragment number} & \begin{tabular}{@{}l@{}}
+                                                                  	\texttt{01} IPv4 \\ 
+                                                                  	\texttt{03} Domain \\ 
+                                                                  	\texttt{04} IPv6
+                                                                   \end{tabular} & \texttt{destination address} & \texttt{destination port} & \texttt{data} \\
+          \hline
+        \end{tabulator}
+      \end{adjustbox}
+      \item
+      Server entweder verwirft Anfrage und sendet nichts zurück oder sendet das entsprechendes Datagram zurück. \\
+      keine Benachrichtigung in beiden Fällen.
+    \end{itemize}
+  \end{frame}
   \begin{frame}{Änderungen von SOCKSv4 zu SOCKSv5}
-	\begin{itemize}
+	 \begin{itemize}
 		\item
 		Auflösung von Domains
 		\item
