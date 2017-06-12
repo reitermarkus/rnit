@@ -44,6 +44,7 @@
       \item Austausch von Daten
     \end{itemize}
   \end{frame}
+	
   \begin{frame}{Ansatz - Ablauf TCP}
     \begin{itemize}
       \item
@@ -71,7 +72,7 @@
           \end{tabular}
         \end{adjustbox}
       \item
-        Client schließt die Verbindung, falls er \texttt{FF} als Antwort erhält.
+        Client schlie{\ss}t die Verbindung, falls er \texttt{FF} als Antwort erhält.
         Sonst wird eine Methoden-spezifische Authentifizierung gestartet.
     \end{itemize}
   \end{frame}
@@ -125,6 +126,7 @@
         \end{adjustbox}
     \end{itemize}
   \end{frame}
+
 	\begin{frame}{Ansatz - Ablauf UDP}
 		\begin{itemize}
 			\item Client sendet UDP Datagram an spezifierten Port.
@@ -132,10 +134,11 @@
 			keine Benachrichtigung in beiden Fällen.
 		\end{itemize}
 	\end{frame}
+
   \begin{frame}{Notwendige Details - UDP Header}
     \begin{itemize}
       \item
-       UDP Request header: \\ 
+       UDP Request header: \\
        \begin{adjustbox}{max width=\textwidth}
          \begin{tabular}{|c|c|c|c|c|c|}
           \hline
@@ -161,17 +164,19 @@
       \end{adjustbox}
     \end{itemize}
   \end{frame}
+
   \begin{frame}{Notwendige Details - Schichtenmodell}
 		\begin{align*}
-			\includegraphics[height=6cm]{assets/schichtenmodell-v2.png}
+			\includegraphics[height=6cm]{schichtenmodell-v2.png}
 		\end{align*}
 	\end{frame}
+
   \begin{frame}{Änderungen von SOCKSv4 zu SOCKSv5}
 	 \begin{itemize}
 		\item
 		Auflösung von Domains
 		\item
-		Kommunikation mittels UDP	
+		Kommunikation mittels UDP
 		\item
 		Unterstützung von IPv6
 		\item
