@@ -30,14 +30,10 @@
 
   \maketitle
 
-  \begin{frame}{Überblick}
+  \begin{frame}{Problem}
     \begin{itemize}
-      \item Was sind Sockets?
-      \item Aufbau von Sockets
-      \item Typen: TCP und UDP
-      \item Änderungen von SOCKSv4 zu SOCKSv5
-      \item Ausblick
-      \item Beispiel
+      \item Es gibt keine Möglichkeit zur transparenten Durchquerung einer Firewall.
+      \item Es gibt keine Möglichkeit zur sicheren Authentifikation einer solchen Durchquerung.
     \end{itemize}
   \end{frame}
 
@@ -48,8 +44,7 @@
       \item Austausch von Daten
     \end{itemize}
   \end{frame}
-
-  \begin{frame}{Ablauf: SOCKSv5 mit TCP-Client}
+  \begin{frame}{Ansatz - Ablauf TCP}
     \begin{itemize}
       \item
         Client sendet Anfrage mit Versions-Identifikator \\
@@ -81,7 +76,7 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Ablauf: SOCKSv5 mit TCP-Client}
+  \begin{frame}{Ansatz - Ablauf TCP}
     \begin{itemize}
       \item
         Client sendet Request-Details:
@@ -130,10 +125,17 @@
         \end{adjustbox}
     \end{itemize}
   \end{frame}
-  \begin{frame}{Ablauf: SOCKSv5 mit UDP-Client}
+	\begin{frame}{Ansatz - Ablauf UDP}
+		\begin{itemize}
+			\item Client sendet UDP Datagram an spezifierten Port.
+			\item Server entweder verwirft Anfrage oder sendet das entsprechendes Datagram zurück. \\
+			keine Benachrichtigung in beiden Fällen.
+		\end{itemize}
+	\end{frame}
+  \begin{frame}{Notwendige Details - UDP Header}
     \begin{itemize}
       \item
-       Client sendet UDP Datagram mit folgendem Header: \\ 
+       UDP Request header: \\ 
        \begin{adjustbox}{max width=\textwidth}
          \begin{tabular}{|c|c|c|c|c|c|}
           \hline
@@ -155,13 +157,15 @@
                                                                   	\texttt{04} IPv6
                                                                    \end{tabular} & \texttt{destination address} & \texttt{destination port} & \texttt{data} \\
           \hline
-        \end{tabulator}
+        \end{tabular}
       \end{adjustbox}
-      \item
-      Server entweder verwirft Anfrage und sendet nichts zurück oder sendet das entsprechendes Datagram zurück. \\
-      keine Benachrichtigung in beiden Fällen.
     \end{itemize}
   \end{frame}
+  \begin{frame}{Notwendige Details - Schichtenmodell}
+		\begin{align*}
+			\includegraphics[height=6cm]{assets/schichtenmodell-v2.png}
+		\end{align*}
+	\end{frame}
   \begin{frame}{Änderungen von SOCKSv4 zu SOCKSv5}
 	 \begin{itemize}
 		\item
