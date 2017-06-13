@@ -130,14 +130,14 @@
   \begin{frame}{Ansatz - Ablauf UDP}
     \begin{itemize}
       \item Client sendet UDP Datagram an spezifierten Port.
-      \item Server verwirft entweder die Anfrage oder sendet das entsprechendes Datagram zurück; keine Benachrichtigung in beiden Fällen.
+      \item Entweder der Server verwirft die Anfrage oder sendet das entsprechendes Datagram zurück; keine Benachrichtigung in beiden Fällen.
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Notwendige Details - UDP Header}
+  \begin{frame}{Notwendige Details - UDP-Header}
     \begin{itemize}
       \item
-       UDP-Request-Header: \\
+       UDP-Header: \\
        \begin{adjustbox}{max width=\textwidth}
          \begin{tabular}{|c|c|c|c|c|c|}
           \hline
@@ -183,7 +183,7 @@
     \end{align*}
   \end{frame}
 
-  \begin{frame}{Darstellung - three way handshake TCP}
+  \begin{frame}{Darstellung - 3-Way Handshake TCP}
 		\begin{align*}
 			\includegraphics[width=\textwidth]{three-way-handshake.png}
 		\end{align*}
